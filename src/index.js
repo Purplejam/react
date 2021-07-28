@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Route} from 'react-router-dom';
 import {addPost, updateNewPostText, updateNewMessage, addNewMessage} from './redux/state.js';
 
-let renderEntireTree = (state) => {
+let renderEntireTree = (props) => {
 	ReactDOM.render(
   <React.StrictMode>
   	<BrowserRouter>

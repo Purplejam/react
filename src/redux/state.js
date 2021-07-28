@@ -1,54 +1,16 @@
-let store = {
-    state: {
-        profilePage: {
-            posts: postData,
-            newPostText: 'lalalala'
-        },
-        messagesPage: {
-           messages: messageData,
-           dialogs: dialogsData,
-           newPostText: 'enter text xyz'
-        },
-        sideBar: {
-            friends: friendsArray
-        }
-    }, 
-    renderEntireTree() {
-        console.log('State changed!');
-    },
-    addPost() {
-        let newPost = new PostItem(state.profilePage.newPostText, 0, 2);
-        postData.push(newPost);
-        state.profilePage.newPostText = '';
-        renderEntireTree(state);
-    },
-    updateNewPostText(newText)  {
-        state.profilePage.newPostText = newText;
-        renderEntireTree(state);
-    },
-    updateNewMessage(text) {
-        state.messagesPage.newPostText = text;
-        renderEntireTree(state);
-    },
-    addNewMessage() {
-        let message = new MessageItem(state.messagesPage.newPostText, messageData.length + 1);
-        messageData.push(message);
-        state.messagesPage.newPostText = '';
-        renderEntireTree(state);
-    },
-    startDom(observer) {
-        renderEntireTree = observer;
-    }
+import DialogItem from './../components/Dialogs/DialogItem/DialogItem.jsx';
+import Message from './../components/Dialogs/Message/Message.jsx';
+import Post from './../components/Profile/MyPosts/Post/Post.jsx';
+import FriendItem from './../components/Navbar/Friends/FriendItem/FriendItem.jsx';
+/* import {renderEntireTree} from './../render.js'; */
 
-
-
-
-
-
+let renderEntireTree = () => {
+    console.log('State changed');
 }
 
-
-
+export const startDom = (observer) => {
+    renderEntireTree = observer;
+}
 
     class User {
         name;
@@ -121,14 +83,44 @@ let friendsArray = [
     new FriendItems('Sasha', 5)
 ]
 
+let state = {
+    profilePage: {
+        posts: postData,
+        newPostText: 'lalalala'
+    },
+    messagesPage: {
+       messages: messageData,
+       dialogs: dialogsData,
+       newPostText: 'enter text'
+    },
+    sideBar: {
+        friends: friendsArray
+    }
+}
 
 
+export let addPost = () => {
+    let newPost = new PostItem(state.profilePage.newPostText, 0, 2);
+    postData.push(newPost);
+    state.profilePage.newPostText = '';
+    renderEntireTree(state);
+}
 
+export let updateNewPostText = (newText) => {
+    state.profilePage.newPostText = newText;
+    renderEntireTree(state);
+}
 
+export let updateNewMessage = (text) => {
+    state.messagesPage.newPostText = text;
+    renderEntireTree(state);
+}
 
-
-
-
-
+export let addNewMessage = () => {
+    let message = new MessageItem(state.messagesPage.newPostText, messageData.length + 1);
+    messageData.push(message);
+    state.messagesPage.newPostText = '';
+    renderEntireTree(state);
+}
 
 export default state
