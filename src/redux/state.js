@@ -7,7 +7,7 @@ let store = {
         messagesPage: {
            messages: messageData,
            dialogs: dialogsData,
-           newPostText: 'enter text'
+           newPostText: 'enter text xyz'
         },
         sideBar: {
             friends: friendsArray
