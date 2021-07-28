@@ -1,13 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import state, {startDom} from './redux/state.js';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Post from './components/Profile/MyPosts/Post/Post.jsx';
+import DialogItem from './components/Dialogs/DialogItem/DialogItem.jsx';
+import Message from './components/Dialogs/Message/Message.jsx';
 import {BrowserRouter, Route} from 'react-router-dom';
 import {addPost, updateNewPostText, updateNewMessage, addNewMessage} from './redux/state.js';
 
-let renderEntireTree = (state) => {
+
+
+
+
+export let renderEntireTree = (state) => {
 	ReactDOM.render(
   <React.StrictMode>
   	<BrowserRouter>
@@ -23,11 +29,4 @@ let renderEntireTree = (state) => {
 );
 }
 
-renderEntireTree(state);
-
-startDom(renderEntireTree);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+export default renderEntireTree
