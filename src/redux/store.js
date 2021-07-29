@@ -2,97 +2,40 @@ import profileReducer from './profile-reducer.js';
 import dialogsReducer from './dialogs-reducer copy.js';
 import sideBarReducer from './sidebar-reducer copy.js';
 
-class User {
-        name;
-        id;
-        constructor(name, id) {
-            this.name = name;
-            this.id = id;
-        }
-}
-
-export class MessageItem {
-        message;
-        id;
-        constructor(text, id) {
-            this.message = text;
-            this.id = id;
-        }
-}
-
-export let dialogsData = [
-        new User('Sasha', 1),
-        new User('Dima', 2),
-        new User('Stepan', 3),
-        new User('Valera', 4),
-        new User('Nikolay', 5)
-]
-   
-
-export let messageData = [
-        new MessageItem('How are You', 1),
-        new MessageItem('London is a capital', 2),
-        new MessageItem('Babushka', 3),
-        new MessageItem('Hello World', 4),
-        new MessageItem('Hello', 5)
-]
-   
-
-export class PostItem {
-    message; 
-    id; 
-    likesCount;
-    constructor(message, id, likeCount) {
-        this.message = message;
-        this.id = id;
-        this.likeCount = likeCount;
-    }
-}
-
-export let postData = [
-    new PostItem("Hi, how are you?", 1, 14),
-    new PostItem("Fine, it is my first post", 2, 43),
-    new PostItem("My dogs foto, yee", 3, 43),
-]
-
-
-export class FriendItems {
-    name;
-    id;
-    constructor(name, id) {
-        this.name = name;
-        this.id = id;
-    }
-}
-
-export let friendsArray = [
-    new FriendItems('Stepan', 1),
-    new FriendItems('Vova', 2),
-    new FriendItems('Valeria', 3),
-    new FriendItems('Yulia', 4),
-    new FriendItems('Sasha', 5)
-]
-
-
-
 let store = {
 state: {
     profilePage: {
-        posts: postData,
+        posts: [
+            {message: "Hi, how are you?", id: 1, likeCount: 24},
+            {message: "My cat, yoo", id: 2, likeCount: 13},
+            {message: "lalala", id: 1, likeCount: 64},
+            ],
         newPostText: 'enter message'
     },
     messagesPage: {
-       messages: messageData,
-       dialogs: dialogsData,
+       messages: [
+            {message: 'How are You', id: 1},
+            {message: 'Im Fine Boi', id: 2},
+            {message: 'Wanna some react?', id: 3},
+            {message: 'Yes, I do!', id: 4},
+            {message: 'Check this link', id: 5},
+        ],
+       dialogs: [
+            {name: 'Sasha', id: 1},
+            {name: 'Dimon', id: 2},
+            {name: 'Pokemon', id: 3},
+            {name: 'Vitalik', id: 4},
+            {name: 'Anton', id: 5},
+        ],
        newPostText: 'enter text'
     },
     sideBar: {
         friends: [
-    new FriendItems('Stepan', 1),
-    new FriendItems('Vova', 2),
-    new FriendItems('Valeria', 3),
-    new FriendItems('Yulia', 4),
-    new FriendItems('Sasha', 5)
+            {name: 'Stepan', id: 1},
+            {name: 'Sasha', id: 2},
+            {name: 'Stepan', id: 3},
+            {name: 'Alyona', id: 4},
+            {name: 'Alex', id: 5},
         ]
     }
 },
@@ -109,11 +52,12 @@ dispatch(action) {
 
     this.state.profilePage = profileReducer(this.state.profilePage, action);
     this.state.messagesPage = dialogsReducer(this.state.messagesPage, action);
-    this.state.sideBar = sideBarReducer(this.state.sideBar);
+    this.state.sideBar = sideBarReducer(this.state.sideBar, action);
     this._callSubscriber(this.state);
 
     }
 }
+
 
 
 export default store

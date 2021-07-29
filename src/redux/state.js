@@ -19,7 +19,7 @@ export class MessageItem {
         }
 }
 
-let dialogsData = [
+export let dialogsData = [
         new User('Sasha', 1),
         new User('Dima', 2),
         new User('Stepan', 3),
@@ -28,7 +28,7 @@ let dialogsData = [
 ]
    
 
-let messageData = [
+export let messageData = [
         new MessageItem('How are You', 1),
         new MessageItem('London is a capital', 2),
         new MessageItem('Babushka', 3),
@@ -48,14 +48,14 @@ export class PostItem {
     }
 }
 
-let postData = [
+export let postData = [
     new PostItem("Hi, how are you?", 1, 14),
     new PostItem("Fine, it is my first post", 2, 43),
     new PostItem("My dogs foto, yee", 3, 43),
 ]
 
 
-class FriendItems {
+export class FriendItems {
     name;
     id;
     constructor(name, id) {
@@ -64,7 +64,7 @@ class FriendItems {
     }
 }
 
-let friendsArray = [
+export let friendsArray = [
     new FriendItems('Stepan', 1),
     new FriendItems('Vova', 2),
     new FriendItems('Valeria', 3),

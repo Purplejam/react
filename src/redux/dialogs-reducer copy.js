@@ -1,19 +1,28 @@
-import {MessageItem} from './state.js';
-import {messageData, dialogsData} from './store.js';
 const ADD_NEW_MESSAGE = 'ADD_NEW_MESSAGE';
 const UPDATE_NEW_MESSAGE = 'UPDATE_NEW_MESSAGE';
 
-
 let initialState = {
-       messages: messageData,
-       dialogs: dialogsData,
+       messages: [
+        {message: 'How are You', id: 1},
+        {message: 'Im Fine Boi', id: 2},
+        {message: 'Wanna some react?', id: 3},
+        {message: 'Yes, I do!', id: 4},
+        {message: 'Check this link', id: 5},
+        ],
+       dialogs: [
+        {name: 'Sasha', id: 1},
+        {name: 'Dimon', id: 2},
+        {name: 'Pokemon', id: 3},
+        {name: 'Vitalik', id: 4},
+        {name: 'Anton', id: 5},
+    				],
        newPostText: 'enter text'
 }
 
 const dialogsReducer = (state = initialState, action) => {
 
 function addNewMessage() {
-    let message = new MessageItem(state.newPostText, state.messages + 1);
+    let message = {message: state.newPostText, id: state.messages + 1};
     state.messages.push(message);
     state.newPostText = '';
 }
@@ -31,9 +40,6 @@ switch(action.type) {
         return state;
     default : return state;
 }
-
-
-
     return state;
 }
 

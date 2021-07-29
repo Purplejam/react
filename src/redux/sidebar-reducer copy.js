@@ -1,26 +1,15 @@
-class FriendItems {
-    name;
-    id;
-    constructor(name, id) {
-        this.name = name;
-        this.id = id;
-    }
-}
-
-
-
 let initialState = {
-	friends: [
-			new FriendItems('Stepan', 1),
-	  new FriendItems('Vova', 2),
-	  new FriendItems('Valeria', 3),
-	  new FriendItems('Yulia', 4),
-	  new FriendItems('Sasha', 5)
-	  ]
+    friends: [
+    {name: 'Stepan', id: 1},
+    {name: 'Sasha', id: 2},
+    {name: 'Stepan', id: 3},
+    {name: 'Alyona', id: 4},
+    {name: 'Alex', id: 5},
+   ]
 }
 
 
-const sideBarReducer = (state = initialState) => {
+const sideBarReducer = (state = initialState, action) => {
 	return state;
     
 }
