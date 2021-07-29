@@ -9,7 +9,7 @@ import Settings from './components/Settings/Settings.jsx';
 import {BrowserRouter, Route} from 'react-router-dom';
 import Friends from './components/Navbar/Friends/Friends.jsx';
 import './App.css';
-import {addPost} from './redux/state.js';
+/* import {addPost} from './redux/state.js'; */
 
 
 
@@ -19,14 +19,11 @@ function App(props) {
   	
     <div className="app-wrapper">
         <Header />
-        <Nav state={props.state.sideBar}/>
+        <Nav state={props.state.sideBar} dispatch={props.dispatch}/>
         
         <div className="app-wrapper-content">
-        	<Route path="/dialogs" render={ () => <Dialogs state={props.state.messagesPage} 
-                updateNewMessage={props.updateNewMessage}
-                addNewMessage={props.addNewMessage}
-            />}/>
-        	<Route path="/profile" render={ () => <Profile state={props.state.profilePage} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>}/>
+        	<Route path="/dialogs" render={ () => <Dialogs state={props.state.messagesPage} dispatch={props.dispatch}/>}/>
+        	<Route path="/profile" render={ () => <Profile state={props.state.profilePage} dispatch={props.dispatch} newPostText={props.state.profilePage.newPostText}/>}/>
             <Route path="/friends" render={ () => <Friends state={props.state.sideBar.friends}/>}/>
         	<Route path="/news" component={News}/>
         	<Route path="/music" component={Music}/>

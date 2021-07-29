@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem.jsx';
 import Message from './Message/Message.jsx';
+import {messageActionCreator, updateMessageActionCreator} from './../../redux/dialogs-reducer copy.js';
 
 
 const Dialogs = (props) => {
@@ -12,12 +13,13 @@ const Dialogs = (props) => {
     let textArea = React.createRef();
 
     const addUserMessage = () => { 
-        props.addNewMessage();
+        props.dispatch(messageActionCreator());
     }
 
     const textUpdate = () => {
         let text = textArea.current.value;
-        props.updateNewMessage(text);
+        props.dispatch(updateMessageActionCreator(text));
+        debugger;
     }
 	return (
     	<div className={classes.dialogs}>

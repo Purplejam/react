@@ -1,7 +1,15 @@
 .item {
-	color: greenyellow;
+	color: white;
+	margin-bottom: 15px;
 }
 
 .item img {
 	border-radius: 100px;
+	margin-right: 10px;
 }
+
+.imgWrapper {
+	display: flex;
+	align-items: center;
+}
+

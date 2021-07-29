@@ -4,9 +4,11 @@ const Post = (props) => {
 
     return(
         <div className={classes.item}>
-            <img src="https://i.pravatar.cc/50"/>
-            {props.message}
-            <div>
+        	<div className={classes.imgWrapper}>
+             <img src="https://i.pravatar.cc/50"/>
+             <span className={classes.itemMessage}>{props.message}</span>
+        	</div>
+            <div className={classes.likes}>
                 <span>Likes {props.likeCount}</span>
             </div>
         </div>
