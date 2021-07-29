@@ -2,6 +2,8 @@ import profileReducer from './profile-reducer.js';
 import dialogsReducer from './dialogs-reducer copy.js';
 import sideBarReducer from './sidebar-reducer copy.js';
 
+
+
 let store = {
 state: {
     profilePage: {
