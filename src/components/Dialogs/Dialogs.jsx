@@ -7,19 +7,18 @@ import {messageActionCreator, updateMessageActionCreator} from './../../redux/di
 
 const Dialogs = (props) => {
 
-    let dialogsArray = props.state.dialogs.map(user => <DialogItem name={user.name} id={user.id}/>);
-    let messagesArray = props.state.messages.map(message => <Message message={message.message} />);
+    let dialogsArray = props.dialogs.map(user => <DialogItem name={user.name} id={user.id}/>);
+    let messagesArray = props.messages.map(message => <Message message={message.message} />);
 
     let textArea = React.createRef();
 
     const addUserMessage = () => { 
-        props.dispatch(messageActionCreator());
+        props.addUserMessage();
     }
 
     const textUpdate = () => {
         let text = textArea.current.value;
-        props.dispatch(updateMessageActionCreator(text));
-        debugger;
+        props.textUpdate(text);
     }
 	return (
     	<div className={classes.dialogs}>
@@ -30,7 +29,7 @@ const Dialogs = (props) => {
             {messagesArray}
          </div>
          <button onClick={addUserMessage}>Add MSG</button> 
-         <textarea ref={textArea} onChange={textUpdate} value={props.state.newPostText}></textarea> 
+         <textarea ref={textArea} onChange={textUpdate} value={props.newPostText}></textarea> 
 
      </div>
 		);
