@@ -5,7 +5,7 @@ import Post from './Post/Post.jsx';
 
 const Posts = (props) => {
 
-  let postsArray = props.posts.map(post => <Post message={post.message} likeCount={post.likeCount}/>);
+  let postsArray = props.profilePage.posts.map(post => <Post message={post.message} likeCount={post.likeCount}/>);
   let newPostElement = React.createRef();
 
   let addPostItem = () => {
@@ -24,7 +24,7 @@ const Posts = (props) => {
                </h3>
                <div>
                    <div>
-                       <textarea ref={newPostElement} value={props.newPostText} onChange={onPostChange}></textarea>   
+                       <textarea ref={newPostElement} value={props.profilePage.newPostText} onChange={onPostChange}></textarea>   
                    </div>
 
                    <div>

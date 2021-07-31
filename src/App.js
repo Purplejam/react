@@ -20,12 +20,15 @@ function App(props) {
   	
     <div className="app-wrapper">
         <Header />
-        <Nav state={props.state.sideBar} dispatch={props.dispatch}/>
+        {/* <Nav state={props.state.sideBar} dispatch={props.dispatch}/> */}
+        <Nav/>
         
         <div className="app-wrapper-content">
-        	<Route path="/dialogs" render={ () => <DialogsContainer store={props.store} state={props.state.messagesPage} dispatch={props.dispatch}/>}/>
-        	<Route path="/profile" render={ () => <Profile store={props.store} dispatch={props.dispatch}/>}/>
-            <Route path="/friends" render={ () => <Friends state={props.state.sideBar.friends}/>}/>
+        	<Route path="/dialogs" render={ () => <DialogsContainer/>}/>
+        	<Route path="/profile" render={ () => <Profile />}/>
+            {/* <Route path="/dialogs" render={ () => <DialogsContainer store={props.store} state={props.state.messagesPage} dispatch={props.dispatch}/>}/>
+            <Route path="/profile" render={ () => <Profile store={props.store} dispatch={props.dispatch}/>}/>
+            <Route path="/friends" render={ () => <Friends state={props.state.sideBar.friends}/>}/> */}
         	<Route path="/news" component={News}/>
         	<Route path="/music" component={Music}/>
         	<Route path="/settings" component={Settings}/>

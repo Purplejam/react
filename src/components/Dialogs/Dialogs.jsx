@@ -7,8 +7,8 @@ import {messageActionCreator, updateMessageActionCreator} from './../../redux/di
 
 const Dialogs = (props) => {
 
-    let dialogsArray = props.dialogs.map(user => <DialogItem name={user.name} id={user.id}/>);
-    let messagesArray = props.messages.map(message => <Message message={message.message} />);
+    let dialogsArray = props.messagesPage.dialogs.map(user => <DialogItem name={user.name} id={user.id}/>);
+    let messagesArray = props.messagesPage.messages.map(message => <Message message={message.message} />);
 
     let textArea = React.createRef();
 
@@ -29,7 +29,7 @@ const Dialogs = (props) => {
             {messagesArray}
          </div>
          <button onClick={addUserMessage}>Add MSG</button> 
-         <textarea ref={textArea} onChange={textUpdate} value={props.newPostText}></textarea> 
+         <textarea ref={textArea} onChange={textUpdate} value={props.messagesPage.newPostText}></textarea> 
 
      </div>
 		);
