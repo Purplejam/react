@@ -15,19 +15,20 @@ const profileReducer = (state = initialState, action) => {
 
 function addPost(state) {
     let newPost = {message: state.newPostText, id: 0, likeCount: 2};
-    
-    let stateCopy = {...state};
-    stateCopy.posts = [...state.posts];
-    stateCopy.posts.push(newPost);
-    stateCopy.newPostText = '';
-    return stateCopy;
-}
+
+    return {
+        ...state,
+        posts: [...state.posts, newPost],
+        newPostText: ''
+    };
+};
 
 function updateNewPostText(newText) {
-    let stateCopy = {...state};
-    stateCopy.newPostText = newText;
-    return stateCopy;
-}
+    return {
+        ...state,
+        newPostText: newText
+    };
+};
 
 
 
