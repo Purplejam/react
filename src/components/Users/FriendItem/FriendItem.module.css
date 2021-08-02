@@ -1,0 +1,17 @@
+.friendsList {
+	padding-top: 100px;
+	color: white;
+}
+
+.friendItem {
+	display: inline-block;
+	padding: 5px;
+}
+
+.friendItem img {
+	border-radius: 50px;
+}
+
+.friendItem p {
+margin-top: 0;
+}
