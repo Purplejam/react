@@ -9,7 +9,8 @@ import usersReducer from './../redux/users-reducer.js';
 let reducers = combineReducers({
     profilePage: profileReducer,
     messagesPage: dialogsReducer,
-    sideBar: sideBarReducer
+    sideBar: sideBarReducer,
+    usersPage: usersReducer
 })
 
 let store = createStore(reducers);

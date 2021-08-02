@@ -8,36 +8,6 @@ import {connect} from 'react-redux';
 import {messageActionCreator, updateMessageActionCreator} from './../../redux/dialogs-reducer copy.js';
 
 
-/* const TestDialogsContainer = (props) => {
-
-    
-
-	return <StoreContext.Consumer> 
-    {
-        (store) => {
-
-        let state = store.getState().messagesPage;
-
-        let textArea = React.createRef();
-
-        const addUserMessage = () => { 
-            store.dispatch(messageActionCreator());
-        }
-
-        const textUpdate = (text) => {
-            store.dispatch(updateMessageActionCreator(text));
-        }
-
-
-        return (<Dialogs textUpdate={textUpdate} 
-            addUserMessage={addUserMessage} 
-            messages={state.messages} dialogs={state.dialogs} 
-            newPostText={state.newPostText}/>);
-
-        }
-        }
-    </StoreContext.Consumer> 
-} */
 
 const mapStateToProps = (state) => {
    return {
