@@ -4,10 +4,7 @@ const SETUSERS = 'SETUSERS';
 
 let initialState = {
     users: [
-        {id: 1, fotoUrl: "https://i.pravatar.cc/50", followed: true, fullName: 'Dmitry', status: 'Boss', location: {city: 'Minsk', country: 'Belarus'} },
-        {id: 2, fotoUrl: "https://i.pravatar.cc/50", followed: true, fullName: 'Dmitry', status: 'Boss', location: {city: 'Moscow', country: 'Russia'} },
-        {id: 3, fotoUrl: "https://i.pravatar.cc/50", followed: false, fullName: 'Dmitry', status: 'Boss', location: {city: 'Kiev', country: 'Ukraine'} },
-        {id: 4, fotoUrl: "https://i.pravatar.cc/50", followed: true, fullName: 'Dmitry', status: 'Boss', location: {city: 'Minsk', country: 'Belarus'} }
+
     ]
 
 }
@@ -37,7 +34,7 @@ const usersReducer = (state = initialState, action) => {
 
             }
 
-        case FOLLOW:
+        case UNFOLLOW:
             return {
                 ...state,
                 users: state.users.map(u => {

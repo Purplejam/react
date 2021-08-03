@@ -3,6 +3,15 @@ import css from './Users.module.css';
 
 
 const Users = (props) => {
+debugger;
+if (props.users.length === 0) {
+	props.setusers( [
+        {id: 1, fotoUrl: "https://i.pravatar.cc/50", followed: true, fullName: 'Dmitry', status: 'Boss', location: {city: 'Minsk', country: 'Belarus'} },
+        {id: 2, fotoUrl: "https://i.pravatar.cc/50", followed: true, fullName: 'Dmitry', status: 'Boss', location: {city: 'Moscow', country: 'Russia'} },
+        {id: 3, fotoUrl: "https://i.pravatar.cc/50", followed: false, fullName: 'Dmitry', status: 'Boss', location: {city: 'Kiev', country: 'Ukraine'} },
+        {id: 4, fotoUrl: "https://i.pravatar.cc/50", followed: true, fullName: 'Dmitry', status: 'Boss', location: {city: 'Minsk', country: 'Belarus'} }
+    ])
+}
 
 
 	return (
@@ -14,7 +23,9 @@ const Users = (props) => {
 			</span>
 
 			<div>
-				{u.followed ? <button>Unfollow</button> : <button>Follow</button>}
+				{u.followed 
+					? <button onClick={ () => {props.unfollow(u.id)}}>Unfollow</button> 
+					: <button onClick={ () => {props.follow(u.id)}}>Follow</button>}
 			</div>
 			<span>
 				<span>
