@@ -3,12 +3,12 @@ const UNFOLLOW = 'UNFOLLOW';
 const SETUSERS = 'SETUSERS';
 
 let initialState = {
-    users: {
-        {id: 1, folowed: true, fullName: 'Dmitry', status: 'Boss', loction: {city: 'Minsk', country: 'Belarus'} },
-        {id: 2, folowed: true, fullName: 'Dmitry', status: 'Boss', loction: {city: 'Moskow', country: 'Russia'} },
-        {id: 3, folowed: false, fullName: 'Dmitry', status: 'Boss', loction: {city: 'Kiev', country: 'Ukraine'} },
-        {id: 4, folowed: true, fullName: 'Dmitry', status: 'Boss', loction: {city: 'Minsk', country: 'Belarus'} }
-    }
+    users: [
+        {id: 1, fotoUrl: "https://i.pravatar.cc/50", followed: true, fullName: 'Dmitry', status: 'Boss', location: {city: 'Minsk', country: 'Belarus'} },
+        {id: 2, fotoUrl: "https://i.pravatar.cc/50", followed: true, fullName: 'Dmitry', status: 'Boss', location: {city: 'Moscow', country: 'Russia'} },
+        {id: 3, fotoUrl: "https://i.pravatar.cc/50", followed: false, fullName: 'Dmitry', status: 'Boss', location: {city: 'Kiev', country: 'Ukraine'} },
+        {id: 4, fotoUrl: "https://i.pravatar.cc/50", followed: true, fullName: 'Dmitry', status: 'Boss', location: {city: 'Minsk', country: 'Belarus'} }
+    ]
 
 }
 
@@ -48,17 +48,18 @@ const usersReducer = (state = initialState, action) => {
                 }) //end users
             }
         case SETUSERS: 
-            return {...users, users: [...state.users, ...action.users]}
+            return {...state, 
+                users: [...state.users, ...action.users]}
 
         default: return state;
     }
 
 }
 
-export const followAc = (userId) => ({type: FOLLOW, userId})
+export const followAC = (userId) => ({type: FOLLOW, userId})
 
-export const unFollowAc = (userId) => ({type: UNFOLLOW, userId})
+export const unFollowAC = (userId) => ({type: UNFOLLOW, userId})
 
-export const setUsersAc = (users) => ({type: SETUSERS, users})
+export const setUsersAC = (users) => ({type: SETUSERS, users})
 
 export default usersReducer;

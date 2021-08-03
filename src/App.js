@@ -10,6 +10,7 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import Friends from './components/Navbar/Friends/Friends.jsx';
 import DialogsContainer from './components/Dialogs/DialogsContainer.jsx';
 import Users from './components/Users/Users.jsx';
+import UsersContainer from './components/Users/UsersContainer.jsx';
 import './App.css';
 /* import {addPost} from './redux/state.js'; */
 
@@ -26,7 +27,7 @@ function App(props) {
         <div className="app-wrapper-content">
         	<Route path="/dialogs" render={ () => <DialogsContainer/>}/>
         	<Route path="/profile" render={ () => <Profile />}/>
-            <Route path="/users" render={ () => <Users />}/>
+            <Route path="/users" render={ () => <UsersContainer />}/>
         	<Route path="/music" component={Music}/>
         	<Route path="/settings" component={Settings}/>
         </div>

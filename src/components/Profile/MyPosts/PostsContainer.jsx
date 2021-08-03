@@ -6,28 +6,6 @@ import {connect} from 'react-redux';
 import {postActionCreator, updateTextActionCreator} from './../../../redux/profile-reducer.js';
 
 
-/* const TestPostsContainer = (props) => {
-
-	return (<StoreContext.Consumer> 
-    { 
-    (store) => {
-    let state = store.getState();
-
-    let addPostItem = () => {
-      store.dispatch(postActionCreator());
-    }
-
-    let onPostChange = (text) => {
-      store.dispatch(updateTextActionCreator(text));
-    }
-
-   return <Posts addPostItem={addPostItem} 
-      onPostChange={onPostChange} 
-      newPostText={state.profilePage.newPostText}
-      posts={state.profilePage.posts}/>} 
-      }
-    </StoreContext.Consumer>);
-} */
 const mapStateToProps = (state) => {
    return {
     profilePage: state.profilePage
