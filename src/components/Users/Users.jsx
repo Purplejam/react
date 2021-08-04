@@ -5,29 +5,39 @@ class Users extends React.Component {
 
 
 	componentDidMount() {
-		fetch('https://social-network.samuraijs.com/api/1.0/users?count=4')
-			.then(response => {
-				return response.json();
-			})
+		fetch(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+			.then(response => response.json())
 			.then(json => {
-				console.log(json.items);
-				return this.props.setusers(json.items);
+				this.props.setusers(json.items);
 			});
 
 	}
 
+	onPageChanged = (page) => {
+		this.props.setpage(page);
+			fetch(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
+			.then(response => response.json())
+			.then(json => this.props.setusers(json.items));
+	}
+
 
 render() {
+	let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+
+	let pages = [];
+	for (let i = 1; i <= pagesCount; i++ ) {
+		pages.push(i);
+	}
+
+
 	return (
 
 
 	<div>
-		<div>
-			<span>1</span>
-			<span>2</span>
-			<span>3</span>
-			<span>4</span>
-			<span>5</span>
+		<div className={css.pagination}>
+			{pages.map(p => {
+				return <span onClick={(e) => {this.onPageChanged(p)}} className={ this.props.currentPage === p && css.selectedPage }>{p}</span>
+				})}
 
 		</div>
 				{

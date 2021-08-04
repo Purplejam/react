@@ -1,3 +1,11 @@
 .friendsList {
 	color: white;
 }
+
+.selectedPage {
+	font-weight: bold;  
+}
+
+.pagination span {
+	cursor: pointer;
+}
