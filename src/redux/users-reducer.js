@@ -2,28 +2,18 @@ const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SETUSERS = 'SETUSERS';
 const SETPAGE = 'SETPAGE';
+const TOGGLEFETCHING = 'TOGGLEFETCHING';
 
 let initialState = {
-    users: [
-
-    ],
+    users: [],
     pageSize: 5,
     totalUsersCount: 100,
-    currentPage: 2
+    currentPage: 1,
+    isFetching: false
 
 }
 
 const usersReducer = (state = initialState, action) => {
-
-    function addPost(state) {
-
-    };
-
-    function updateNewPostText(newText) {
-
-    };
-
-
 
     switch(action.type) {
         case FOLLOW:
@@ -53,18 +43,23 @@ const usersReducer = (state = initialState, action) => {
                 users: action.users}
         case SETPAGE: 
             return {...state, 
-                currentPage: action.page}                  
+                currentPage: action.page}
+        case TOGGLEFETCHING:
+            return {...state,
+                isFetching: action.isFetching}                  
         default: return state;
     }
 
 }
 
-export const followAC = (userId) => ({type: FOLLOW, userId})
+export const follow = (userId) => ({type: FOLLOW, userId})
 
-export const unFollowAC = (userId) => ({type: UNFOLLOW, userId})
+export const unfollow = (userId) => ({type: UNFOLLOW, userId})
 
-export const setUsersAC = (users) => ({type: SETUSERS, users})
+export const setusers = (users) => ({type: SETUSERS, users})
 
-export const setPageAC = (page) => ({type: SETPAGE, page})
+export const setpage = (page) => ({type: SETPAGE, page})
+
+export const isfetchingToggle = (isFetching) => ({type: TOGGLEFETCHING, isFetching})
 
 export default usersReducer;
