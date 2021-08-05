@@ -1,5 +1,6 @@
 import React from 'react';
 import css from './Users.module.css';
+import {NavLink} from 'react-router-dom';
 
 
 const Users = (props) => {
@@ -25,7 +26,10 @@ const Users = (props) => {
 							<span>
 				
 								<div>
-									<img src={u.photos.small != null ? u.photos.small : "https://i.pravatar.cc/50"}/>
+									<NavLink to={"/profile/" + u.id}>	
+										<img src={u.photos.small != null ? u.photos.small : "https://i.pravatar.cc/50"}/>
+									</NavLink>
+								
 								</div>
 							</span>
 				
