@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import Header from './components/Header/Header.jsx';
+import HeaderContainer from './components/Header/HeaderContainer.jsx';
 import Nav from './components/Navbar/Navbar.jsx';
 import Profile from './components/Profile/Profile.jsx';
 import Dialogs from './components/Dialogs/Dialogs.jsx';
@@ -22,7 +22,7 @@ function App(props) {
   return (
   	
     <div className="app-wrapper">
-        <Header />
+        <HeaderContainer />
         <Nav/>
         
         <div className="app-wrapper-content">
