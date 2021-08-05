@@ -37,6 +37,17 @@ const Users = (props) => {
 								{u.followed 
 									? <button onClick={ () => {props.unfollow(u.id)}}>Unfollow</button> 
 									: <button onClick={ () => {props.follow(u.id)}}>Follow</button>}
+									<button onClick={() => {
+											fetch(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+												credentials: 'include',
+												method: 'POST',
+												headers: {
+													"API-KEY": "7ed1a18b-da95-467c-8ff8-12eb66b13f4e"
+												}
+											})
+												.then(response => console.log(response))
+
+										}}>TestPost</button>
 							</div>
 							<span>
 								<span>

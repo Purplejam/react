@@ -9,7 +9,9 @@ class UserClassContainer extends React.Component {
 
 	componentDidMount() {
 		this.props.isfetchingToggle(true);
-		fetch(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+		fetch(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+			credentials: 'include'
+		})
 			.then(response => {
 				return response.json()})
 			.then(json => {
@@ -21,7 +23,9 @@ class UserClassContainer extends React.Component {
 	onPageChanged = (page) => {
 		this.props.setpage(page);
 		this.props.isfetchingToggle(true);
-			fetch(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
+			fetch(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {
+				credentials: 'include'
+			})
 			.then(response => response.json())
 			.then(json => {
 				this.props.isfetchingToggle(false);
