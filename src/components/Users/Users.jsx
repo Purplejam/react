@@ -6,7 +6,6 @@ import userApi from './../../api/api.js';
 
 const Users = (props) => {
 
-
 	let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
 	let pages = [];
@@ -36,25 +35,29 @@ const Users = (props) => {
 				
 							<div>
 								{u.followed 
-									? <button onClick={ () => {
+									? <button disabled={props.followInPropgress.some(id => id == u.id)} onClick={ () => {
+										props.followInPropgressToggle(u.id, true);
 											userApi.followUser(u.id, 'DELETE')
 												.then(response => response.json())
 												.then(json => {
 													if (json.resultCode == 0) {
 														props.unfollow(u.id)
 													}
+													props.followInPropgressToggle(u.id, false);
 												})
 
 										
 									}}>Unfollow</button> 
-									: <button onClick={ () => {
-
+									: <button disabled={props.followInPropgress.some(id => id == u.id)} onClick={ () => {
+										props.followInPropgressToggle(u.id, true);
+										console.log(props);
 											userApi.followUser(u.id, 'POST')
 												.then(response => response.json())
 												.then(json => {
 													if (json.resultCode == 0) {
 														props.follow(u.id);
 														}
+														props.followInPropgressToggle(u.id, false);
 													})
 												
 										

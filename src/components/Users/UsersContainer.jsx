@@ -1,7 +1,7 @@
 import React from 'react';
 import Users from './Users.jsx';
 import {connect} from 'react-redux';
-import {follow, unfollow, setusers, setpage, isfetchingToggle} from './../../redux/users-reducer.js';
+import {follow, unfollow, setusers, setpage, isfetchingToggle, followInPropgressToggle} from './../../redux/users-reducer.js';
 import preloader from './../../assets/images/preloader.gif';
 import userApi from './../../api/api.js';
 
@@ -40,7 +40,10 @@ render() {
 															users={this.props.users}
 															unfollow={this.props.unfollow}
 															follow={this.props.follow}
-															isFetching={this.props.isFetching}/>
+															isFetching={this.props.isFetching}
+															followInPropgress={this.props.followInPropgress}
+															followInPropgressToggle={this.props.followInPropgressToggle}
+														/>
 															</>
 	}
 } //end of component
@@ -51,11 +54,12 @@ let mapStateToProps = (state) => {
 		pageSize: state.usersPage.pageSize,
 		totalUsersCount: state.usersPage.totalUsersCount,
 		currentPage: state.usersPage.currentPage,
-		isFetching: state.usersPage.isFetching
+		isFetching: state.usersPage.isFetching,
+		followInPropgress: state.usersPage.followInPropgress
 	}
 }
 
 
 
 export default connect(mapStateToProps, {follow, unfollow, setusers, 
-	setpage, isfetchingToggle,})(UserClassContainer);
+	setpage, isfetchingToggle, followInPropgressToggle})(UserClassContainer);
