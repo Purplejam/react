@@ -3,15 +3,14 @@ import Users from './Users.jsx';
 import {connect} from 'react-redux';
 import {follow, unfollow, setusers, setpage, isfetchingToggle} from './../../redux/users-reducer.js';
 import preloader from './../../assets/images/preloader.gif';
+import userApi from './../../api/api.js';
 
 class UserClassContainer extends React.Component {
 
 
 	componentDidMount() {
 		this.props.isfetchingToggle(true);
-		fetch(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-			credentials: 'include'
-		})
+		userApi.getAllUsers(this.props.currentPage, this.props.pageSize)
 			.then(response => {
 				return response.json()})
 			.then(json => {
@@ -23,9 +22,7 @@ class UserClassContainer extends React.Component {
 	onPageChanged = (page) => {
 		this.props.setpage(page);
 		this.props.isfetchingToggle(true);
-			fetch(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {
-				credentials: 'include'
-			})
+			userApi.getAllUsers(page, this.props.pageSize)
 			.then(response => response.json())
 			.then(json => {
 				this.props.isfetchingToggle(false);

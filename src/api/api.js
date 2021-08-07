@@ -1,8 +1,23 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+const userApi = {
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+	getAllUsers(currentPage, pageSize) {
+		return fetch(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`, {
+			credentials: 'include'
+		})
+	},
+
+	followUser(userId, method) {
+		return fetch(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {
+			credentials: 'include',
+			method: method,
+			headers: {
+				"API-KEY": "7ed1a18b-da95-467c-8ff8-12eb66b13f4e"
+			}
+		})
+
+	}
+
+}
+
+
+export default userApi

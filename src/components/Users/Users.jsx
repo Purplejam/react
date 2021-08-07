@@ -1,6 +1,7 @@
 import React from 'react';
 import css from './Users.module.css';
 import {NavLink} from 'react-router-dom';
+import userApi from './../../api/api.js';
 
 
 const Users = (props) => {
@@ -36,37 +37,23 @@ const Users = (props) => {
 							<div>
 								{u.followed 
 									? <button onClick={ () => {
-											fetch(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-												credentials: 'include',
-												method: 'DELETE',
-												headers: {
-													"API-KEY": "7ed1a18b-da95-467c-8ff8-12eb66b13f4e"
-												}
-											})
+											userApi.followUser(u.id, 'DELETE')
 												.then(response => response.json())
 												.then(json => {
 													if (json.resultCode == 0) {
 														props.unfollow(u.id)
 													}
-													console.log(json)})
+												})
 
 										
-
 									}}>Unfollow</button> 
 									: <button onClick={ () => {
 
-											fetch(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-												credentials: 'include',
-												method: 'POST',
-												headers: {
-													"API-KEY": "7ed1a18b-da95-467c-8ff8-12eb66b13f4e"
-												}
-											})
+											userApi.followUser(u.id, 'POST')
 												.then(response => response.json())
 												.then(json => {
 													if (json.resultCode == 0) {
 														props.follow(u.id);
-														console.log(json);
 														}
 													})
 												
