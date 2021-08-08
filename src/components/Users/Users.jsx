@@ -35,33 +35,8 @@ const Users = (props) => {
 				
 							<div>
 								{u.followed 
-									? <button  disabled={props.followInPropgress.some(id => id == u.id)} onClick={ () => {
-										props.followInPropgressToggle(u.id, true);
-											userApi.followUser(u.id, 'DELETE')
-												.then(response => response.json())
-												.then(json => {
-													if (json.resultCode == 0) {
-														props.unfollow(u.id)
-													}
-													props.followInPropgressToggle(u.id, false);
-												})
-
-										
-									}}>Unfollow</button> 
-									: <button  disabled={props.followInPropgress.some(id => id == u.id)} onClick={ () => {
-										props.followInPropgressToggle(u.id, true);
-											userApi.followUser(u.id, 'POST')
-												.then(response => response.json())
-												.then(json => {
-													if (json.resultCode == 0) {
-														props.follow(u.id);
-														}
-													props.followInPropgressToggle(u.id, false);
-													})
-												
-										
-
-										}}>Follow</button>}
+									? <button  disabled={props.followInPropgress.some(id => id == u.id)} onClick={ () => {props.unfollow(u.id)}}>Unfollow</button> 
+									: <button  disabled={props.followInPropgress.some(id => id == u.id)} onClick={ () => {props.follow(u.id)}}>Follow</button>}
 							</div>
 							<span>
 								<span>

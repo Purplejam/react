@@ -1,7 +1,7 @@
 import React from 'react';
 import Users from './Users.jsx';
 import {connect} from 'react-redux';
-import {follow, unfollow, setusers, setpage, isfetchingToggle, followInPropgressToggle, getUsersThunkCreator} from './../../redux/users-reducer.js';
+import {followSucces, unfollowSucces, setusers, setpage, isfetchingToggle, followInPropgressToggle, getUsers, follow, unfollow} from './../../redux/users-reducer.js';
 import preloader from './../../assets/images/preloader.gif';
 import userApi from './../../api/api.js';
 
@@ -13,13 +13,8 @@ class UserClassContainer extends React.Component {
 	}
 
 	onPageChanged = (page) => {
+		this.props.getUsers(page, this.props.pageSize);
 		this.props.setpage(page);
-		this.props.isfetchingToggle(true);
-			userApi.getAllUsers(page, this.props.pageSize)
-			.then(response => response.json())
-			.then(json => {
-				this.props.isfetchingToggle(false);
-				return this.props.setusers(json.items)});
 	}
 
 
@@ -31,11 +26,13 @@ render() {
 															onPageChanged={this.onPageChanged}
 															currentPage={this.props.currentPage}
 															users={this.props.users}
-															unfollow={this.props.unfollow}
-															follow={this.props.follow}
+															unfollowSucces={this.props.unfollowSucces}
+															followSucces={this.props.followSucces}
 															isFetching={this.props.isFetching}
 															followInPropgress={this.props.followInPropgress}
 															followInPropgressToggle={this.props.followInPropgressToggle}
+															follow={this.props.follow}
+															unfollow={this.props.unfollow}
 														/>
 															</>
 	}
@@ -54,5 +51,5 @@ let mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps, {follow, unfollow, setusers, 
-	setpage, isfetchingToggle, followInPropgressToggle, getUsers: getUsersThunkCreator})(UserClassContainer);
+export default connect(mapStateToProps, {followSucces, unfollowSucces, setusers, 
+	setpage, isfetchingToggle, followInPropgressToggle, getUsers, follow, unfollow})(UserClassContainer);

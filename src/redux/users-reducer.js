@@ -61,7 +61,7 @@ const usersReducer = (state = initialState, action) => {
 
 }
 
-export const getUsersThunkCreator = (currentPage, pageSize) => {
+export const getUsers = (currentPage, pageSize) => {
 
 return (dispatch) => {
     dispatch(isfetchingToggle(true));
@@ -76,9 +76,37 @@ return (dispatch) => {
     }
 }
 
-export const follow = (userId) => ({type: FOLLOW, userId})
+export const follow = (userId) => {
+    return (dispatch) => {
+    dispatch(followInPropgressToggle(userId, true));
+        userApi.followUser(userId, 'POST')
+            .then(response => response.json())
+            .then(json => {
+                if (json.resultCode == 0) {
+                    dispatch(followSucces(userId));
+                    }
+                dispatch(followInPropgressToggle(userId, false));
+                })
+    }
+}
 
-export const unfollow = (userId) => ({type: UNFOLLOW, userId})
+export const unfollow = (userId) => {
+    return (dispatch) => {
+dispatch(followInPropgressToggle(userId, true));
+    userApi.followUser(userId, 'DELETE')
+        .then(response => response.json())
+        .then(json => {
+            if (json.resultCode == 0) {
+                dispatch(unfollowSucces(userId))
+            }
+            dispatch(followInPropgressToggle(userId, false));
+        })
+    }
+}
+
+export const followSucces = (userId) => ({type: FOLLOW, userId})
+
+export const unfollowSucces = (userId) => ({type: UNFOLLOW, userId})
 
 export const setusers = (users) => ({type: SETUSERS, users})
 
