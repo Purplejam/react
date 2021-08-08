@@ -1,7 +1,7 @@
 import React from 'react';
 import Users from './Users.jsx';
 import {connect} from 'react-redux';
-import {follow, unfollow, setusers, setpage, isfetchingToggle, followInPropgressToggle} from './../../redux/users-reducer.js';
+import {follow, unfollow, setusers, setpage, isfetchingToggle, followInPropgressToggle, getUsersThunkCreator} from './../../redux/users-reducer.js';
 import preloader from './../../assets/images/preloader.gif';
 import userApi from './../../api/api.js';
 
@@ -9,14 +9,7 @@ class UserClassContainer extends React.Component {
 
 
 	componentDidMount() {
-		this.props.isfetchingToggle(true);
-		userApi.getAllUsers(this.props.currentPage, this.props.pageSize)
-			.then(response => {
-				return response.json()})
-			.then(json => {
-				this.props.isfetchingToggle(false);
-				return this.props.setusers(json.items);
-			});
+		this.props.getUsers(this.props.currentPage, this.props.pageSize);
 	}
 
 	onPageChanged = (page) => {
@@ -62,4 +55,4 @@ let mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps, {follow, unfollow, setusers, 
-	setpage, isfetchingToggle, followInPropgressToggle})(UserClassContainer);
+	setpage, isfetchingToggle, followInPropgressToggle, getUsers: getUsersThunkCreator})(UserClassContainer);

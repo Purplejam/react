@@ -1,3 +1,5 @@
+import userApi from './../api/api.js';
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SETUSERS = 'SETUSERS';
@@ -51,12 +53,27 @@ const usersReducer = (state = initialState, action) => {
                 isFetching: action.isFetching} 
         case FOLLOW_IN_PROPGRESS:
             return {...state,
-                followInPropgress: action.isFetching 
-                ? [...state.followInPropgress, action.userId]
-                : state.followInPropgress.filter(id => id != action.userId)}                 
+                followInPropgress: action.isFetching
+                ? [state.followInPropgress, action.userId]
+                : state.followInPropgress.filter(id => id !== action.userId)}                 
         default: return state;
     }
 
+}
+
+export const getUsersThunkCreator = (currentPage, pageSize) => {
+
+return (dispatch) => {
+    dispatch(isfetchingToggle(true));
+    userApi.getAllUsers(currentPage, pageSize)
+        .then(response => {
+            return response.json()})
+        .then(json => {
+            dispatch(isfetchingToggle(false));
+            dispatch(setusers(json.items));
+        });
+
+    }
 }
 
 export const follow = (userId) => ({type: FOLLOW, userId})
