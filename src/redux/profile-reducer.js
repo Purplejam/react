@@ -1,3 +1,5 @@
+import userApi from './../api/api.js';
+
 const ADD_POST = 'ADD_POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -47,6 +49,19 @@ switch(action.type) {
     default : return state;
 }
 
+}
+
+export const getProfileUser = (userId) => {
+    return (dispatch) => {
+        userApi.getProfile(userId)
+            .then(response => {
+                return response.json()})
+            .then(json => {
+                dispatch(setUserProfile(json));
+                return json;
+            });
+
+    }
 }
 
 export let postActionCreator = () => {

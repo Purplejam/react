@@ -9,7 +9,6 @@ const ProfileInfo = (props) => {
 		return <img src={preloader} />
 	}
 
-	
 	return (
         <div>
             <div><img className={classes.banner}src="https://images.freeimages.com/images/large-previews/bd7/falloxbow-1058032.jpg" alt=""></img>

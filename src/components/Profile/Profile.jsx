@@ -10,6 +10,7 @@ import PostsContainer from './MyPosts/PostsContainer.jsx';
 
 
 const Profile = (props) => {
+	
 
 	return (
         <div>

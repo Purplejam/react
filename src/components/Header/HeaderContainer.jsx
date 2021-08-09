@@ -2,22 +2,13 @@ import React from 'react';
 import classes from './Header.module.css';
 import Header from './Header.jsx';
 import {connect} from 'react-redux';
-import {setAuthUserData} from './../../redux/auth-reducer.js';
+import {setAuthUserData, getAuth} from './../../redux/auth-reducer.js';
+import userApi from './../../api/api.js';
 
 class HeaderContainer extends React.Component  {
 
 	componentDidMount() {
-			fetch(`https://social-network.samuraijs.com/api/1.0/auth/me`, {credentials: 'include'})
-			.then(response => {
-				return response.json()})
-			.then(json => {
-				if (json.resultCode == 0) {
-					console.log(json.data);
-					let {id, login, email} = json.data;
-					this.props.setAuthUserData(id, login, email);
-				}
-			});
-
+		this.props.getAuth();
 	}
 
 	render() {
@@ -31,4 +22,4 @@ let mapStateToProps = (state) => ({
 })
 
 
-export default connect(mapStateToProps, {setAuthUserData})(HeaderContainer)
+export default connect(mapStateToProps, {setAuthUserData, getAuth})(HeaderContainer)

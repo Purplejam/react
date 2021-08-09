@@ -3,8 +3,9 @@ import classes from './Profile.module.css';
 import Posts from './MyPosts/Posts.jsx';
 import Profile from './Profile.jsx';
 import {connect} from 'react-redux';
-import {setUserProfile} from '../../redux/profile-reducer.js';
+import {setUserProfile, getProfileUser} from '../../redux/profile-reducer.js';
 import {withRouter} from 'react-router-dom';
+import userApi from './../../api/api.js';
 
 
 
@@ -16,17 +17,12 @@ class ProfileContainer extends React.Component {
 	componentDidMount() {
 
 
+
 		let userId = this.props.match.params.userId;
 		if (!userId) {
 			userId = 2;
 		}
-		fetch(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-			.then(response => {
-				return response.json()})
-			.then(json => {
-				this.props.setUserProfile(json);
-				return json;
-			});
+		this.props.getProfileUser(userId);
 
 	}
 
@@ -43,4 +39,4 @@ class ProfileContainer extends React.Component {
 
 let withUrlDataContainerComponent = withRouter(ProfileContainer);
 
-export default connect(mapStateToProps, {setUserProfile})(withUrlDataContainerComponent);
+export default connect(mapStateToProps, {setUserProfile, getProfileUser})(withUrlDataContainerComponent);
