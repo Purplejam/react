@@ -12,6 +12,7 @@ import DialogsContainer from './components/Dialogs/DialogsContainer.jsx';
 import Users from './components/Users/Users.jsx';
 import UsersContainer from './components/Users/UsersContainer.jsx';
 import ProfileContainer from './components/Profile/ProfileContainer.jsx';
+import Login from './components/Login/Login.jsx';
 import './App.css';
 /* import {addPost} from './redux/state.js'; */
 
@@ -31,6 +32,7 @@ function App(props) {
             <Route path="/users" render={ () => <UsersContainer />}/>
         	<Route path="/music" component={Music}/>
         	<Route path="/settings" component={Settings}/>
+            <Route path="/login" component={Login}/>
         </div>
         
     </div>

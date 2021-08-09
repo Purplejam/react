@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {followSucces, unfollowSucces, setusers, setpage, isfetchingToggle, followInPropgressToggle, getUsers, follow, unfollow} from './../../redux/users-reducer.js';
 import preloader from './../../assets/images/preloader.gif';
 import userApi from './../../api/api.js';
+import {Redirect} from 'react-router-dom';
 
 class UserClassContainer extends React.Component {
 
@@ -19,6 +20,11 @@ class UserClassContainer extends React.Component {
 
 
 render() {
+
+	if (this.props.isAuth === false) {
+		return <Redirect to="/login"/>
+	}
+
 	return <>
 	{this.props.isFetching ? <img src={preloader} /> : null}
 	<Users totalUsersCount={this.props.totalUsersCount}
@@ -45,7 +51,8 @@ let mapStateToProps = (state) => {
 		totalUsersCount: state.usersPage.totalUsersCount,
 		currentPage: state.usersPage.currentPage,
 		isFetching: state.usersPage.isFetching,
-		followInPropgress: state.usersPage.followInPropgress
+		followInPropgress: state.usersPage.followInPropgress,
+		isAuth: state.auth.isAuth
 	}
 }
 

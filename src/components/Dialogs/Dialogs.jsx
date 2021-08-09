@@ -3,6 +3,7 @@ import classes from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem.jsx';
 import Message from './Message/Message.jsx';
 import {messageActionCreator, updateMessageActionCreator} from './../../redux/dialogs-reducer copy.js';
+import {Redirect} from 'react-router-dom';
 
 
 const Dialogs = (props) => {
@@ -20,6 +21,10 @@ const Dialogs = (props) => {
         let text = textArea.current.value;
         props.textUpdate(text);
     }
+
+    if (props.isAuth === false) {
+        return <Redirect to="/login"/>
+    } 
 	return (
     	<div className={classes.dialogs}>
          <div className={classes.dialogsItems}>
