@@ -5,6 +5,7 @@ import {followSucces, unfollowSucces, setusers, setpage, isfetchingToggle, follo
 import preloader from './../../assets/images/preloader.gif';
 import userApi from './../../api/api.js';
 import {Redirect} from 'react-router-dom';
+import {WithAuthRedirect} from './../../hoc/WithAuthRedirect.js';
 
 class UserClassContainer extends React.Component {
 
@@ -56,7 +57,9 @@ let mapStateToProps = (state) => {
 	}
 }
 
+let AuthRedirect = WithAuthRedirect(UserClassContainer);
+
 
 
 export default connect(mapStateToProps, {followSucces, unfollowSucces, setusers, 
-	setpage, isfetchingToggle, followInPropgressToggle, getUsers, follow, unfollow})(UserClassContainer);
+	setpage, isfetchingToggle, followInPropgressToggle, getUsers, follow, unfollow})(AuthRedirect);
