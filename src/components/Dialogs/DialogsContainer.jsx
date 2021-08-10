@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import {messageActionCreator, updateMessageActionCreator} from './../../redux/dialogs-reducer copy.js';
 import {WithAuthRedirect} from './../../hoc/WithAuthRedirect.js';
+import {compose} from 'redux';
 
 
 
@@ -30,10 +31,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-let AuthRedirectComponent = WithAuthRedirect(Dialogs);
-
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
-
- 
-
-export default DialogsContainer
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    WithAuthRedirect)(Dialogs);

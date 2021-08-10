@@ -1,4 +1,5 @@
 import userApi from './../api/api.js';
+import {compose} from 'redux';
 const SET_USER_DATA = 'SET_USER_DATA';
 
 
