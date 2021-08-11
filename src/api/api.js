@@ -28,4 +28,26 @@ const userApi = {
 }
 
 
+export const profileApi = {
+	getStatus(user) {
+		return fetch(`https://social-network.samuraijs.com/api/1.0/profile/status/${user}`);
+	},
+
+	updateStatus(status) {
+	 return fetch(`https://social-network.samuraijs.com/api/1.0/profile/status/`, {
+     method: 'PUT',
+     headers: {
+         "Content-Type": "application/json",
+         "API-KEY": "7ed1a18b-da95-467c-8ff8-12eb66b13f4e"
+     },
+     credentials: 'include',
+     body: JSON.stringify({
+         status: status
+     }) 
+ })
+	}
+
+}
+
+
 export default userApi

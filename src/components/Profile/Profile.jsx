@@ -10,11 +10,10 @@ import PostsContainer from './MyPosts/PostsContainer.jsx';
 
 
 const Profile = (props) => {
-	
 
 	return (
         <div>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profile={props.profile} status={props.status} updateProfileStatus={props.updateProfileStatus}/>
             <PostsContainer/> 
         </div>
 		);
