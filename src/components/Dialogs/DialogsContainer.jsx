@@ -24,13 +24,12 @@ const mapDispatchToProps = (dispatch) => {
     textUpdate: (text) => {
         dispatch(updateMessageActionCreator(text));
     },
-    addUserMessage: () => {
-        dispatch(messageActionCreator());
+    addUserMessage: (text) => {
+        dispatch(messageActionCreator(text));
     }
     }
 }
 
 
 export default compose(
-    connect(mapStateToProps, mapDispatchToProps),
-    WithAuthRedirect)(Dialogs);
+    connect(mapStateToProps, mapDispatchToProps))(Dialogs);

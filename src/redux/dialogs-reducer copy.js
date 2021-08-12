@@ -22,11 +22,10 @@ let initialState = {
 const dialogsReducer = (state = initialState, action) => {
 
 
-function addNewMessage() {
-    let message = {message: state.newPostText, id: state.messages + 1};
+function addNewMessage(text) {
+    let message = {message: text, id: state.messages + 1};
     return {
         ...state,
-        newPostText: '',
         messages: [...state.messages, message]
     };
 };
@@ -40,7 +39,7 @@ function updateNewMessage(text) {
 
 switch(action.type) {
     case(ADD_NEW_MESSAGE) : 
-        return addNewMessage();
+        return addNewMessage(action.message);
     case(UPDATE_NEW_MESSAGE) : 
         return updateNewMessage(action.text);
     default : return state;
@@ -49,9 +48,10 @@ switch(action.type) {
 }
 
 
-export let messageActionCreator = () => {
+export let messageActionCreator = (message) => {
   return {
-    type: ADD_NEW_MESSAGE
+    type: ADD_NEW_MESSAGE,
+    message
   }
 }
 
