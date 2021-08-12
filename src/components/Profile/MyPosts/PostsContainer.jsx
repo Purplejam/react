@@ -3,7 +3,7 @@ import classes from './Posts.module.css';
 import Posts from './Posts.jsx';
 import StoreContext from './../../../storeContext.js'
 import {connect} from 'react-redux';
-import {postActionCreator, updateTextActionCreator} from './../../../redux/profile-reducer.js';
+import {postActionCreator} from './../../../redux/profile-reducer.js';
 
 
 const mapStateToProps = (state) => {
@@ -14,11 +14,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
    return {
-    onPostChange: (text) => {
-        dispatch(updateTextActionCreator(text));
-    },
-    addPostItem: () => {
-        dispatch(postActionCreator());
+    addPostItem: (text) => {
+        dispatch(postActionCreator(text));
     }
     }
 }

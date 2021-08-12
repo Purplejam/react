@@ -6,7 +6,7 @@ import Dialogs from './Dialogs.jsx';
 import StoreContext from './../../storeContext.js';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import {messageActionCreator, updateMessageActionCreator} from './../../redux/dialogs-reducer copy.js';
+import {messageActionCreator} from './../../redux/dialogs-reducer copy.js';
 import {WithAuthRedirect} from './../../hoc/WithAuthRedirect.js';
 import {compose} from 'redux';
 
@@ -21,9 +21,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
    return {
-    textUpdate: (text) => {
-        dispatch(updateMessageActionCreator(text));
-    },
     addUserMessage: (text) => {
         dispatch(messageActionCreator(text));
     }

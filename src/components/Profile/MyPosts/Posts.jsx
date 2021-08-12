@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './Posts.module.css';
 import Post from './Post/Post.jsx';
+import { Formik, Form, Field, ErrorMessage, useFormikContext } from 'formik';
 
 
 const Posts = (props) => {
@@ -8,13 +9,8 @@ const Posts = (props) => {
   let postsArray = props.profilePage.posts.map(post => <Post message={post.message} likeCount={post.likeCount}/>);
   let newPostElement = React.createRef();
 
-  let addPostItem = () => {
-    props.addPostItem();
-  }
-
-  let onPostChange = () => {
-    let text = newPostElement.current.value;
-    props.onPostChange(text);
+  let addPostItem = (text) => {
+    props.addPostItem(text);
   }
 
 	return (
@@ -23,13 +19,7 @@ const Posts = (props) => {
                    My Posts
                </h3>
                <div>
-                   <div>
-                       <textarea ref={newPostElement} value={props.profilePage.newPostText} onChange={onPostChange}></textarea>   
-                   </div>
-
-                   <div>
-                       <button onClick={addPostItem}>Add Post</button>
-                   </div>
+                   <ProfilePostMessage addPostItem={addPostItem}/>
                </div>
 
                <div className={classes.allPosts}>
@@ -40,6 +30,38 @@ const Posts = (props) => {
 		);
 }
 
+
+const ProfilePostMessage = (props) => {
+
+  const onSubmitHandler = (values, {setSubmitting}) => {
+      console.log(values);
+      props.addPostItem(values.textMessage);
+      setSubmitting(false);
+  }
+
+  return (
+    <Formik
+      initialValues={{}}
+      onSubmit={onSubmitHandler}>
+      {({ isSubmitting }) => (
+         <Form  name="profilePostForm">
+
+          <Field component="textarea" name="textMessage" placeholder="add post"/>
+            {/* <ErrorMessage name="textarea" component="div" /> */}
+            <div></div>
+
+          <button type="submit" disabled={isSubmitting}>
+             Add Post
+          </button>
+
+
+         </Form>
+       )}
+
+      
+    </Formik>
+    )
+}
 
 
 

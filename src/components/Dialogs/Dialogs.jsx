@@ -18,11 +18,6 @@ const Dialogs = (props) => {
         props.addUserMessage();
     }
 
-    const textUpdate = () => {
-        let text = textArea.current.value;
-        props.textUpdate(text);
-    }
-
     if (props.isAuth === false) {
         return <Redirect to="/login"/>
     } 
@@ -35,8 +30,6 @@ const Dialogs = (props) => {
          <div className={classes.messages}>
             {messagesArray}
          </div>
-         {/* <button onClick={addUserMessage}>Add MSG</button> 
-         <textarea ref={textArea} onChange={textUpdate} value={props.messagesPage.newPostText}></textarea> */}
          
      </div>
       <TextMessageArea addUserMessage={props.addUserMessage}/>
@@ -58,7 +51,7 @@ const TextMessageArea = (props) => {
             onSubmit={onSubmit}>
 
        {({ isSubmitting }) => (
-         <Form className={classes.dialogs} name="dialogsForm">
+         <Form  className={classes.dialogs} name="dialogsForm">
 
            <button type="submit" disabled={isSubmitting}>
              Submit
