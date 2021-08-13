@@ -56,9 +56,7 @@ const ProfilePostMessage = (props) => {
 
 
          </Form>
-       )}
-
-      
+       )} 
     </Formik>
     )
 }
