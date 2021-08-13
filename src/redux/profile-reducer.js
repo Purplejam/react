@@ -1,6 +1,8 @@
 import userApi from './../api/api.js';
 import {profileApi} from './../api/api.js';
 
+const text = 'test';
+
 const ADD_POST = 'ADD_POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
