@@ -1,10 +1,11 @@
 import React from 'react';
-import classes from './Dialogs.module.css';
+import styles from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem.jsx';
 import Message from './Message/Message.jsx';
 import {messageActionCreator, updateMessageActionCreator} from './../../redux/dialogs-reducer copy.js';
 import {Redirect} from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage, useFormikContext } from 'formik';
+import * as Yup from 'yup';
 
 
 const Dialogs = (props) => {
@@ -23,11 +24,11 @@ const Dialogs = (props) => {
     } 
 	return (
         <div>
-    	<div className={classes.dialogs}>
-         <div className={classes.dialogsItems}>
+    	<div className={styles.dialogs}>
+         <div className={styles.dialogsItems}>
             {dialogsArray}         	
          </div>
-         <div className={classes.messages}>
+         <div className={styles.messages}>
             {messagesArray}
          </div>
          
@@ -45,20 +46,30 @@ const TextMessageArea = (props) => {
         props.addUserMessage(values.textMessage)
         setSubmitting(false);
     }
+
+    const SignupSchema = Yup.object().shape({
+        textMessage: Yup.string()
+        .min(2, 'Too Short!')
+        .max(100, 'Too Long!')
+        .required('Required')
+    });
     return(
         <Formik
             initialValues={{'textMessage': ''}}
-            onSubmit={onSubmit}>
+            onSubmit={onSubmit}
+            validationSchema={SignupSchema}>
 
-       {({ isSubmitting }) => (
-         <Form  className={classes.dialogs} name="dialogsForm">
+       {({ isSubmitting, errors, touched }) => (
+         <Form  className={styles.dialogs} name="dialogsForm">
 
            <button type="submit" disabled={isSubmitting}>
              Submit
            </button>
 
-            <Field component="textarea" name="textMessage" placeholder="textarea"/>
-            {/* <ErrorMessage name="textarea" component="div" /> */}
+            <Field className={errors.textMessage && touched.textMessage ? styles.invalid : null} component="textarea" name="textMessage" placeholder="textarea"/>
+            {(errors.textMessage && touched.textMessage) 
+              ? <div className={styles.errorBox}>{errors.textMessage}</div>
+              : null}
          </Form>
        )}
             

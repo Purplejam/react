@@ -21,9 +21,10 @@
 	color: gold;
 }
 
-.messages {
-
+.errorBox {
+	color: red;
 }
 
-.message {
+.invalid {
+	border: 1px solid red;
 }

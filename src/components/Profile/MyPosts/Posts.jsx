@@ -1,7 +1,8 @@
 import React from 'react';
-import classes from './Posts.module.css';
+import styles from './Posts.module.css';
 import Post from './Post/Post.jsx';
 import { Formik, Form, Field, ErrorMessage, useFormikContext } from 'formik';
+import * as Yup from 'yup';
 
 
 const Posts = (props) => {
@@ -14,7 +15,7 @@ const Posts = (props) => {
   }
 
 	return (
-           <div className={classes.posts}>
+           <div className={styles.posts}>
                <h3>
                    My Posts
                </h3>
@@ -22,7 +23,7 @@ const Posts = (props) => {
                    <ProfilePostMessage addPostItem={addPostItem}/>
                </div>
 
-               <div className={classes.allPosts}>
+               <div className={styles.allPosts}>
                    {postsArray}   
                </div>
 
@@ -34,20 +35,31 @@ const Posts = (props) => {
 const ProfilePostMessage = (props) => {
 
   const onSubmitHandler = (values, {setSubmitting}) => {
-      console.log(values);
       props.addPostItem(values.textMessage);
       setSubmitting(false);
   }
 
+  const SignupSchema = Yup.object().shape({
+   textMessage: Yup.string()
+     .min(2, 'Too Short!')
+     .max(100, 'Too Long!')
+     .required('Required')
+ });
+
   return (
     <Formik
       initialValues={{}}
-      onSubmit={onSubmitHandler}>
-      {({ isSubmitting }) => (
+      onSubmit={onSubmitHandler}
+      validationSchema={SignupSchema}>
+      {({ isSubmitting, errors, touched  }) => (
          <Form  name="profilePostForm">
 
-          <Field component="textarea" name="textMessage" placeholder="add post"/>
-            {/* <ErrorMessage name="textarea" component="div" /> */}
+          <Field className={errors.textMessage && touched.textMessage ? styles.invalid : null} component="textarea" name="textMessage" placeholder="add post"/>
+
+            {(errors.textMessage && touched.textMessage) 
+              ? <div className={styles.errorBox}>{errors.textMessage}</div>
+              : null}
+
             <div></div>
 
           <button type="submit" disabled={isSubmitting}>

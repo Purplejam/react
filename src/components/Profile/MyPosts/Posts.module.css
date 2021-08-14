@@ -5,3 +5,11 @@
 .allPosts {
 	margin-top: 10px;
 }
+
+.errorBox {
+	color: red;
+}
+
+.invalid {
+	border: 1px solid red;
+}
