@@ -23,6 +23,22 @@ const userApi = {
 
 	getProfile(user) {
 		return fetch(`https://social-network.samuraijs.com/api/1.0/profile/${user}`);
+	},
+
+	loginAuth(email, password) {
+		return  fetch(`https://social-network.samuraijs.com/api/1.0/auth/login`, {
+								   method: 'POST',
+								   headers: {
+								       "Content-Type": "application/json",
+								       "API-KEY": "7ed1a18b-da95-467c-8ff8-12eb66b13f4e"
+								   },
+								   credentials: 'include',
+								   body: JSON.stringify({
+								       email: email,
+								       password: password,
+								       rememberMe: true
+								   }) 
+								})
 	}
 
 }

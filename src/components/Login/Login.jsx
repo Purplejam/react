@@ -1,6 +1,9 @@
 import React from 'react';
 import classes from './Login.module.css';
 import { Formik, Form, Field, ErrorMessage, useFormikContext } from 'formik';
+import {connect} from 'react-redux';
+import {compose} from 'redux';
+import {login} from './../../redux/auth-reducer.js';
 
 
 const Login = (props) => {
@@ -8,11 +11,12 @@ const Login = (props) => {
 	return (
     	<div>
          <h1>Login</h1>
-         <FormLogin />
+         <FormLogin login={props.login}/>
 
      </div>
 		);
 }
+
 
 
 const FormLogin = (props) => {
@@ -25,7 +29,7 @@ return	<Formik
        }}
        onSubmit={(values, { setSubmitting }) => {
 
-           console.log(values);
+           props.login(values.email, values.password)
            setSubmitting(false);
 
        }}
@@ -56,4 +60,7 @@ return	<Formik
 
 
 
-export default Login
+
+
+
+export default connect(null, {login})(Login)

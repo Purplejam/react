@@ -52,4 +52,18 @@ export const getAuth = () => {
     }
 }
 
+export const login = (email, login) => {
+    return (dispatch) => {
+        userApi.loginAuth(email, login)
+            .then(response => response.json())
+            .then(json => {
+                if (json.resultCode == 0) {
+                    dispatch(getAuth());
+                }
+            })
+
+
+    }
+}
+
 export default authReducer;
