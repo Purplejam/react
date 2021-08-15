@@ -39,6 +39,12 @@ const userApi = {
 								       rememberMe: true
 								   }) 
 								})
+	},
+
+	logout() {
+		return  fetch(`https://social-network.samuraijs.com/api/1.0/auth/login`, {
+			method: 'DELETE'
+		})
 	}
 
 }

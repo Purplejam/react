@@ -4,9 +4,13 @@ import { Formik, Form, Field, ErrorMessage, useFormikContext } from 'formik';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {login} from './../../redux/auth-reducer.js';
+import {Redirect} from 'react-router-dom';
 
 
 const Login = (props) => {
+  if (props.isAuth) {
+    return <Redirect to="/profile"/>
+  }
 
 	return (
     	<div>
@@ -21,39 +25,45 @@ const Login = (props) => {
 
 const FormLogin = (props) => {
 
-return	<Formik
-       initialValues={{ email: '', password: '' }}
-       validate={values => {
-         const errors = {};
-         return errors;
-       }}
-       onSubmit={(values, { setSubmitting }) => {
+  return	<Formik
+         initialValues={{ email: '', password: '' }}
+         validate={values => {
+           const errors = {};
+           return errors;
+         }}
+         onSubmit={(values, { setSubmitting }) => {
 
-           props.login(values.email, values.password)
-           setSubmitting(false);
+             props.login(values.email, values.password)
+             setSubmitting(false);
 
-       }}
-     >
-       {({ isSubmitting }) => (
-         <Form>
-         	<div>
-            <Field type="email" name="email" placeholder="Email"/>
-           	<ErrorMessage name="email" component="div" />
-         	</div>
+         }}
+       >
+         {({ isSubmitting }) => (
+           <Form>
+           	<div>
+              <Field type="email" name="email" placeholder="Email"/>
+             	<ErrorMessage name="email" component="div" />
+           	</div>
 
-         	<div>
-            <Field type="password" name="password" placeholder="Password"/>
-           	<ErrorMessage name="password" component="div" />	
-         	</div>
+           	<div>
+              <Field type="password" name="password" placeholder="Password"/>
+             	<ErrorMessage name="password" component="div" />	
+           	</div>
 
 
-           <button type="submit" disabled={isSubmitting}>
-             Submit
-           </button>
-         </Form>
-       )}
-     </Formik>
+             <button type="submit" disabled={isSubmitting}>
+               Submit
+             </button>
+           </Form>
+         )}
+       </Formik>
 
+}
+
+const mapStateToProps = (state) => {
+  return {
+    isAuth: state.auth.isAuth
+  }
 }
 
 
@@ -61,6 +71,4 @@ return	<Formik
 
 
 
-
-
-export default connect(null, {login})(Login)
+export default connect(mapStateToProps, {login})(Login)
