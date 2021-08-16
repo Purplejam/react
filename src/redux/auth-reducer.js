@@ -58,8 +58,14 @@ export const login = (email, login) => {
             .then(json => {
                 if (json.resultCode == 0) {
                     dispatch(getAuth());
+                    return json.resultCode;
+                } else if (json.resultCode != 0) {
+                    console.log(json);
+                    let error = new Error('error');
+                    throw error;
                 }
             })
+            .catch((e) => console.log(e));
 
 
     }

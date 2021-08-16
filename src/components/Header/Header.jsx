@@ -13,7 +13,7 @@ const Header = (props) => {
     		<div className={classes.loginBlock}>
                 {props.auth.isAuth &&
                     <div>
-                        {props.auth.login}
+                        {props.auth.login + ' '}
                         <button onClick={logout}>logout</button>
                     </div>
                     }

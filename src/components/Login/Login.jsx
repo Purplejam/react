@@ -8,9 +8,9 @@ import {Redirect} from 'react-router-dom';
 
 
 const Login = (props) => {
-  if (props.isAuth) {
+  /* if (props.isAuth) {
     return <Redirect to="/profile"/>
-  }
+  } */
 
 	return (
     	<div>
@@ -31,10 +31,9 @@ const FormLogin = (props) => {
            const errors = {};
            return errors;
          }}
-         onSubmit={(values, { setSubmitting }) => {
-
-             props.login(values.email, values.password)
-             setSubmitting(false);
+         onSubmit={(values, {setSubmitting}) => {
+             props.login(values.email, values.password);
+             setSubmitting(false); 
 
          }}
        >
