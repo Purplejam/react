@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './Login.module.css';
+import style from './Login.module.css';
 import { Formik, Form, Field, ErrorMessage, useFormikContext } from 'formik';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
@@ -31,15 +31,20 @@ const FormLogin = (props) => {
            const errors = {};
            return errors;
          }}
-         onSubmit={(values, {setSubmitting}) => {
-             props.login(values.email, values.password);
+         onSubmit={(values, {setSubmitting, setStatus}) => {
+             props.login(values.email, values.password, setStatus);
              setSubmitting(false); 
 
          }}
        >
-         {({ isSubmitting }) => (
+         {({ isSubmitting, status, errors }) => (
            <Form>
            	<div>
+              
+              <div className={style.statusBox}>
+                {status}
+                
+              </div>
               <Field type="email" name="email" placeholder="Email"/>
              	<ErrorMessage name="email" component="div" />
            	</div>

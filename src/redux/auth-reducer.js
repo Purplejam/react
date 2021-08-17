@@ -1,5 +1,6 @@
 import userApi from './../api/api.js';
 import {compose} from 'redux';
+import {setStatus} from 'formik';
 const SET_USER_DATA = 'SET_USER_DATA';
 
 
@@ -51,21 +52,21 @@ export const getAuth = () => {
     }
 }
 
-export const login = (email, login) => {
+export const login = (email, login, setStatus) => {
     return (dispatch) => {
         userApi.loginAuth(email, login)
             .then(response => response.json())
             .then(json => {
+
                 if (json.resultCode == 0) {
                     dispatch(getAuth());
                     return json.resultCode;
                 } else if (json.resultCode != 0) {
-                    console.log(json);
-                    let error = new Error('error');
-                    throw error;
+                    let result = [];
+                    json.messages.forEach(message => result.push(message + '! '));
+                    setStatus(result);
                 }
             })
-            .catch((e) => console.log(e));
 
 
     }
