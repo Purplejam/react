@@ -40,7 +40,7 @@ export let setAuthUserData = (id, login, email, isAuth) => {
 
 export const getAuth = () => {
     return (dispatch) => {
-        userApi.getAuth()
+        return userApi.getAuth()
         .then(response => {
             return response.json()})
         .then(json => {
@@ -52,12 +52,11 @@ export const getAuth = () => {
     }
 }
 
-export const login = (email, login, setStatus) => {
+export const login = (email, login, rememberMe, setStatus) => {
     return (dispatch) => {
-        userApi.loginAuth(email, login)
+        userApi.loginAuth(email, login, rememberMe)
             .then(response => response.json())
             .then(json => {
-
                 if (json.resultCode == 0) {
                     dispatch(getAuth());
                     return json.resultCode;
@@ -67,8 +66,6 @@ export const login = (email, login, setStatus) => {
                     setStatus(result);
                 }
             })
-
-
     }
 }
 

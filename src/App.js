@@ -1,3 +1,4 @@
+import React from 'react';
 import logo from './logo.svg';
 import HeaderContainer from './components/Header/HeaderContainer.jsx';
 import Nav from './components/Navbar/Navbar.jsx';
@@ -13,35 +14,46 @@ import Users from './components/Users/Users.jsx';
 import UsersContainer from './components/Users/UsersContainer.jsx';
 import ProfileContainer from './components/Profile/ProfileContainer.jsx';
 import Login from './components/Login/Login.jsx';
+import {initializeApp} from './redux/app-reducer.js';
+import {connect} from 'react-redux';
 import './App.css';
+import preloader from './assets/images/preloader.gif';
 /* import {addPost} from './redux/state.js'; */
 
 
 
-function App(props) {
+class App extends React.Component {
 
-  return (
-  	
-    <div className="app-wrapper">
-        <HeaderContainer />
-        <Nav/>
-        
-        <div className="app-wrapper-content">
-        	<Route path="/dialogs" render={ () => <DialogsContainer/>}/>
-        	<Route path="/profile/:userId?" render={ () => <ProfileContainer />}/>
-            <Route path="/users" render={ () => <UsersContainer />}/>
-        	<Route path="/music" component={Music}/>
-        	<Route path="/settings" component={Settings}/>
-            <Route path="/login" component={Login}/>
-        </div>
-        
-    </div>
-  
+    componentDidMount() {
+        this.props.initializeApp();
+    }
 
-    );
-}
+    render() { 
+        if (!this.props.initialized) {
+            return <img src={preloader} />
+        }
+      return (
+          
+        <div className="app-wrapper">
+            <HeaderContainer />
+            <Nav/>
+            
+            <div className="app-wrapper-content">
+                <Route path="/dialogs" render={ () => <DialogsContainer/>}/>
+                <Route path="/profile/:userId?" render={ () => <ProfileContainer />}/>
+                <Route path="/users" render={ () => <UsersContainer />}/>
+                <Route path="/music" component={Music}/>
+                <Route path="/settings" component={Settings}/>
+                <Route path="/login" component={Login}/>
+            </div>
+            
+        </div>);
+        }
+    }
+ const mapStateToProps = (state) => ({
+    initialized: state.app.initialized
+ })
 
 
 
-
-export default App;
+export default connect(mapStateToProps, {initializeApp})(App)

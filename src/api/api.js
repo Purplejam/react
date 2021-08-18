@@ -1,13 +1,15 @@
+const baseUrl = 'https://social-network.samuraijs.com/api/1.0';
+
 const userApi = {
 
 	getAllUsers(currentPage, pageSize) {
-		return fetch(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`, {
+		return fetch(`${baseUrl}/users?page=${currentPage}&count=${pageSize}`, {
 			credentials: 'include'
 		})
 	},
 
 	followUser(userId, method) {
-		return fetch(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {
+		return fetch(`${baseUrl}/follow/${userId}`, {
 			credentials: 'include',
 			method: method,
 			headers: {
@@ -18,15 +20,15 @@ const userApi = {
 	},
 
 	getAuth() {
-		return fetch(`https://social-network.samuraijs.com/api/1.0/auth/me`, {credentials: 'include'});
+		return fetch(`${baseUrl}/auth/me`, {credentials: 'include'});
 	},
 
 	getProfile(user) {
-		return fetch(`https://social-network.samuraijs.com/api/1.0/profile/${user}`);
+		return fetch(`${baseUrl}/profile/${user}`);
 	},
 
-	loginAuth(email, password) {
-		return  fetch(`https://social-network.samuraijs.com/api/1.0/auth/login`, {
+	loginAuth(email, password, rememberMe) {
+		return  fetch(`${baseUrl}/auth/login`, {
 								   method: 'POST',
 								   headers: {
 								       "Content-Type": "application/json",
@@ -36,13 +38,13 @@ const userApi = {
 								   body: JSON.stringify({
 								       email: email,
 								       password: password,
-								       rememberMe: true
+								       rememberMe: rememberMe
 								   }) 
 								})
 	},
 
 	logout() {
-		return  fetch(`https://social-network.samuraijs.com/api/1.0/auth/login`, {
+		return  fetch(`${baseUrl}/auth/login`, {
 			method: 'DELETE'
 		})
 	}
@@ -52,11 +54,11 @@ const userApi = {
 
 export const profileApi = {
 	getStatus(user) {
-		return fetch(`https://social-network.samuraijs.com/api/1.0/profile/status/${user}`);
+		return fetch(`${baseUrl}/profile/status/${user}`);
 	},
 
 	updateStatus(status) {
-	 return fetch(`https://social-network.samuraijs.com/api/1.0/profile/status/`, {
+	 return fetch(`${baseUrl}/profile/status/`, {
      method: 'PUT',
      headers: {
          "Content-Type": "application/json",

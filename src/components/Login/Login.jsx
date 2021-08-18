@@ -8,9 +8,9 @@ import {Redirect} from 'react-router-dom';
 
 
 const Login = (props) => {
-  /* if (props.isAuth) {
+  if (props.isAuth) {
     return <Redirect to="/profile"/>
-  } */
+  }
 
 	return (
     	<div>
@@ -26,13 +26,13 @@ const Login = (props) => {
 const FormLogin = (props) => {
 
   return	<Formik
-         initialValues={{ email: '', password: '' }}
+         initialValues={{ email: '', password: '', rememberMe: true }}
          validate={values => {
            const errors = {};
            return errors;
          }}
          onSubmit={(values, {setSubmitting, setStatus}) => {
-             props.login(values.email, values.password, setStatus);
+             props.login(values.email, values.password, values.rememberMe, setStatus);
              setSubmitting(false); 
 
          }}
@@ -53,6 +53,12 @@ const FormLogin = (props) => {
               <Field type="password" name="password" placeholder="Password"/>
              	<ErrorMessage name="password" component="div" />	
            	</div>
+
+            <div>
+              <Field type="checkbox" name="rememberMe" placeholder="Remember me" checked/>
+              <span>Remember Me</span>
+              <ErrorMessage name="password" component="div" />  
+            </div>
 
 
              <button type="submit" disabled={isSubmitting}>
