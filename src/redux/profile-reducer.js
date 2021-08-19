@@ -46,45 +46,29 @@ switch(action.type) {
 
 }
 
-export const getProfileUser = (userId) => {
-    return (dispatch) => {
-        userApi.getProfile(userId)
-            .then(response => {
-                return response.json()})
-            .then(json => {
-                dispatch(setUserProfile(json));
-                return json;
-            });
+export const getProfileUser = (userId) => async (dispatch) => {
+        let response = await userApi.getProfile(userId);
+        let json = await response.json();
+        dispatch(setUserProfile(json));
+    }
+
+
+export const getProfileStatus = (userId) => async (dispatch) => {
+        let response = await profileApi.getStatus(userId);
+        let json = await response.json();
+        dispatch(getStatus(json));
 
     }
-}
 
-export const getProfileStatus = (userId) => {
-    return (dispatch) => {
-        profileApi.getStatus(userId)
-            .then(response => {
-                return response.json()
-            })
-            .then(text => {
-                return dispatch(getStatus(text));
-            })
-    }
-}
 
-export const updateProfileStatus = (status) => {
-    return(dispatch) => {
-        profileApi.updateStatus(status)
-        .then(response => {
-            
-            return response.json();
-        })
-        .then(json => {
-            return json.resultCode === 0 
-            ? dispatch(getStatus(status))
-            : json.message
-        })
+export const updateProfileStatus = (status) => async (dispatch) => {
+        let response = await profileApi.updateStatus(status);
+        let json = await response.json();
+        if (json.resultCode === 0) {
+            dispatch(getStatus(status));
+        }
     }
-}
+
 
 
 

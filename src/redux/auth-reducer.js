@@ -38,48 +38,39 @@ export let setAuthUserData = (id, login, email, isAuth) => {
     }
 }
 
-export const getAuth = () => {
-    return (dispatch) => {
-        return userApi.getAuth()
-        .then(response => {
-            return response.json()})
-        .then(json => {
-            if (json.resultCode == 0) {
-                let {id, login, email} = json.data;
-                dispatch(setAuthUserData(id, login, email, true));
-            }
-        });
+export const getAuth = () => async (dispatch) => {
+        let response = await userApi.getAuth();
+        let json = await response.json();
+        if (json.resultCode === 0) {
+            let {id, login, email} = json.data;
+            dispatch(setAuthUserData(id, login, email, true));
+        }
     }
-}
 
-export const login = (email, login, rememberMe, setStatus) => {
-    return (dispatch) => {
-        userApi.loginAuth(email, login, rememberMe)
-            .then(response => response.json())
-            .then(json => {
-                if (json.resultCode == 0) {
-                    dispatch(getAuth());
-                    return json.resultCode;
-                } else if (json.resultCode != 0) {
-                    let result = [];
-                    json.messages.forEach(message => result.push(message + '! '));
-                    setStatus(result);
-                }
-            })
-    }
-}
 
-export const logout = () => {
-    return (dispatch) => {
-        userApi.logout()
-            .then(response => response.json())
-            .then(json => {
-                if(json.resultCode == 0) {
-                    dispatch(setAuthUserData(null, null, null, false));
-                }
-            })
+export const login = (email, login, rememberMe, setStatus) => async (dispatch) => {
+        let response = await userApi.loginAuth(email, login, rememberMe);
+        let json = await response.json();
+  
+        if (json.resultCode === 0) {
+            dispatch(getAuth());
+        } else if (json.resultCode !== 0) {
+            let result = [];
+            json.messages.forEach(message => result.push(message + '! '));
+            setStatus(result);
+        }
     }
-}
+
+
+export const logout = () => async (dispatch) => {
+        let response = await userApi.logout();
+        let json = await response.json();
+
+        if(json.resultCode == 0) {
+            dispatch(setAuthUserData(null, null, null, false));
+        }
+    }
+
 
 
 

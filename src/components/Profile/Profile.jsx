@@ -4,12 +4,17 @@ import Posts from './MyPosts/Posts.jsx';
 import ProfileInfo from './ProfileInfo/ProfileInfo.jsx';
 import Post from './MyPosts/Post/Post.jsx';
 import PostsContainer from './MyPosts/PostsContainer.jsx';
+import {Redirect} from 'react-router-dom';
 
 
 
 
 
 const Profile = (props) => {
+
+ if (props.isAuth === false) {
+     return <Redirect to="/login"/>
+ } 
 
 	return (
         <div>

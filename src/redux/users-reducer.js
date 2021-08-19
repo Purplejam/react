@@ -61,48 +61,39 @@ const usersReducer = (state = initialState, action) => {
 
 }
 
-export const getUsers = (currentPage, pageSize) => {
-
-return (dispatch) => {
+export const getUsers = (currentPage, pageSize) => async (dispatch) => {
     dispatch(isfetchingToggle(true));
-    userApi.getAllUsers(currentPage, pageSize)
-        .then(response => {
-            return response.json()})
-        .then(json => {
-            dispatch(isfetchingToggle(false));
-            dispatch(setusers(json.items));
-        });
-
-    }
+    let response = await userApi.getAllUsers(currentPage, pageSize);
+    let json = await response.json();
+    dispatch(isfetchingToggle(false));
+    dispatch(setusers(json.items));
 }
 
-export const follow = (userId) => {
-    return (dispatch) => {
+
+export const follow = (userId) => async (dispatch) => {
     dispatch(followInPropgressToggle(userId, true));
-        userApi.followUser(userId, 'POST')
-            .then(response => response.json())
-            .then(json => {
-                if (json.resultCode == 0) {
-                    dispatch(followSucces(userId));
-                    }
-                dispatch(followInPropgressToggle(userId, false));
-                })
+    let response = await userApi.followUser(userId, 'POST');
+    let json = await response.json();
+
+    if (json.resultCode === 0) {
+        dispatch(followSucces(userId));
     }
+    dispatch(followInPropgressToggle(userId, false));
 }
 
-export const unfollow = (userId) => {
-    return (dispatch) => {
-dispatch(followInPropgressToggle(userId, true));
-    userApi.followUser(userId, 'DELETE')
-        .then(response => response.json())
-        .then(json => {
-            if (json.resultCode == 0) {
-                dispatch(unfollowSucces(userId))
-            }
-            dispatch(followInPropgressToggle(userId, false));
-        })
+
+export const unfollow = (userId) => async (dispatch) => {
+    dispatch(followInPropgressToggle(userId, true));
+    let response = await userApi.followUser(userId, 'DELETE');
+    let json = await response.json();
+        
+    if (json.resultCode == 0) {
+        dispatch(unfollowSucces(userId));
     }
+    dispatch(followInPropgressToggle(userId, false));
+
 }
+
 
 export const followSucces = (userId) => ({type: FOLLOW, userId})
 
