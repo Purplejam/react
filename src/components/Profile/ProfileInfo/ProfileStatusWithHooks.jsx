@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import classes from './ProfileInfo.module.css';
 
 
@@ -23,6 +23,10 @@ const statusChange = (e) => {
     setStatus(value);
     props.updateProfileStatus(value);  
 }
+
+useEffect(() => {
+   setStatus(props.status);
+}, [props.status])
 
     return (<div>
                 {!editMode 
