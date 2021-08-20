@@ -69,29 +69,27 @@ export const getUsers = (currentPage, pageSize) => async (dispatch) => {
     dispatch(setusers(json.items));
 }
 
-
-export const follow = (userId) => async (dispatch) => {
+export const followUndollowMethod = async (dispatch, userId, rqMethod, action) => {
     dispatch(followInPropgressToggle(userId, true));
-    let response = await userApi.followUser(userId, 'POST');
+    let response = await userApi.followUser(userId, rqMethod);
     let json = await response.json();
 
     if (json.resultCode === 0) {
-        dispatch(followSucces(userId));
+        dispatch(action);
     }
     dispatch(followInPropgressToggle(userId, false));
 }
 
 
-export const unfollow = (userId) => async (dispatch) => {
-    dispatch(followInPropgressToggle(userId, true));
-    let response = await userApi.followUser(userId, 'DELETE');
-    let json = await response.json();
-        
-    if (json.resultCode == 0) {
-        dispatch(unfollowSucces(userId));
-    }
-    dispatch(followInPropgressToggle(userId, false));
+export const follow = (userId) => async (dispatch) => {
 
+    followUndollowMethod(dispatch, userId, 'POST', followSucces(userId));
+}
+
+
+export const unfollow = (userId) => async (dispatch) => {
+
+    followUndollowMethod(dispatch, userId, 'DELETE', unfollowSucces(userId));
 }
 
 
