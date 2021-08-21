@@ -16,7 +16,6 @@ let renderEntireTree = (state) => {
   	<BrowserRouter>
   		<Provider store={store}>
     	<App />
-    	{/* <App state={state} store={store} dispatch={store.dispatch.bind(store)} /> */}
     </Provider>
    </BrowserRouter>
   </React.StrictMode>,
