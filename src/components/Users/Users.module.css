@@ -9,3 +9,13 @@
 .pagination span {
 	cursor: pointer;
 }
+
+.pagination {
+	max-width: 100%;
+	overflow-x: hidden;
+}
+
+.userContainer {
+		max-width: 100%;
+		overflow-x: hidden;
+}

@@ -18,7 +18,7 @@ import {initializeApp} from './redux/app-reducer.js';
 import {connect} from 'react-redux';
 import './App.css';
 import preloader from './assets/images/preloader.gif';
-/* import {addPost} from './redux/state.js'; */
+import store from './redux/redux-store.js';
 
 
 
@@ -53,7 +53,6 @@ class App extends React.Component {
  const mapStateToProps = (state) => ({
     initialized: state.app.initialized
  })
-
 
 
 export default connect(mapStateToProps, {initializeApp})(App)

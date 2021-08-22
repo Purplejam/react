@@ -34,7 +34,8 @@ const usersReducer = (state = initialState, action) => {
             }
         case SETUSERS: 
             return {...state, 
-                users: action.users}
+                users: action.users,
+                totalUsersCount: action.totalUsersCount}
         case SETPAGE: 
             return {...state, 
                 currentPage: action.page}
@@ -55,8 +56,9 @@ export const getUsers = (currentPage, pageSize) => async (dispatch) => {
     dispatch(isfetchingToggle(true));
     let response = await userApi.getAllUsers(currentPage, pageSize);
     let json = await response.json();
+    console.log(json);
     dispatch(isfetchingToggle(false));
-    dispatch(setusers(json.items));
+    dispatch(setusers(json.items, json.totalCount));
 }
 
 export const followUndollowMethod = async (dispatch, userId, rqMethod, action) => {
@@ -87,7 +89,7 @@ export const followSucces = (userId) => ({type: FOLLOW, userId})
 
 export const unfollowSucces = (userId) => ({type: UNFOLLOW, userId})
 
-export const setusers = (users) => ({type: SETUSERS, users})
+export const setusers = (users, totalUsersCount) => ({type: SETUSERS, users, totalUsersCount})
 
 export const setpage = (page) => ({type: SETPAGE, page})
 
