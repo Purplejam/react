@@ -14,7 +14,7 @@ import {compose} from 'redux';
 
 
 
-class ProfileContainer extends React.Component {
+class ProfileContainer extends React.PureComponent {
 
 
 	componentDidMount() {

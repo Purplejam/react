@@ -9,7 +9,7 @@ const Users = ({totalUsersCount, pageSize, onPageChanged, currentPage, ...props}
 
 	return (
 	<div className={css.userContainer}>
-		<Paginator totalUsersCount={totalUsersCount} pageSize={pageSize} onPageChanged={onPageChanged}
+		<Paginator totalItemsCount={totalUsersCount} pageSize={pageSize} onPageChanged={onPageChanged}
 		 currentPage={currentPage}/>
 				{
 					props.users.map(u => <User key={u.id} 
