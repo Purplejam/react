@@ -3,7 +3,7 @@ import classes from './Profile.module.css';
 import Posts from './MyPosts/Posts.jsx';
 import Profile from './Profile.jsx';
 import {connect} from 'react-redux';
-import {setUserProfile, getProfileUser, getProfileStatus, updateProfileStatus} from '../../redux/profile-reducer.js';
+import {setUserProfile, getProfileUser, getProfileStatus, updateProfileStatus, uploadUserPhoto} from '../../redux/profile-reducer.js';
 import {withRouter} from 'react-router-dom';
 import userApi from './../../api/api.js';
 import {Redirect} from 'react-router-dom';
@@ -14,26 +14,38 @@ import {compose} from 'redux';
 
 
 
-class ProfileContainer extends React.PureComponent {
+class ProfileContainer extends React.Component {
+
+	refreshProfile() {
+			let userId = this.props.match.params.userId;
+			if (!userId) {
+				userId = this.props.authUserId
+				if (!userId) {
+					this.props.history.push('/login');
+				}
+			}
+
+			this.props.getProfileUser(userId);
+			this.props.getProfileStatus(userId);
+
+	}
 
 
 	componentDidMount() {
+		this.refreshProfile();
+	}
 
-
-
-		let userId = this.props.match.params.userId;
-			if (!userId) {
-				userId = this.props.authUserId
+	componentDidUpdate(prevProps, prevState) {
+		if (this.props.match.params.userId !== prevProps.match.params.userId) {
+				this.refreshProfile();
 			}
-			this.props.getProfileUser(userId);
-			this.props.getProfileStatus(userId);
 	}
 
 
 	render() {
 
 	  return (
-	    <Profile {...this.props} />
+	    <Profile {...this.props} isOwner={!this.props.match.params.userId}/>
 	  )
 	}}
 
@@ -47,6 +59,6 @@ class ProfileContainer extends React.PureComponent {
 
 
 export default 	compose(
-		connect(mapStateToProps, {setUserProfile, getProfileUser, getProfileStatus, updateProfileStatus}),
+		connect(mapStateToProps, {setUserProfile, getProfileUser, getProfileStatus, updateProfileStatus, uploadUserPhoto}),
 		withRouter
 		)(ProfileContainer);

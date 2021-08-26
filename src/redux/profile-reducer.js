@@ -6,6 +6,7 @@ const ADD_POST = 'ADD_POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const GET_STATUS = 'GET_STATUS';
+const UPLOAD_USER_PHOTO = 'UPLOAD_USER_PHOTO';
 
 
 let initialState = {
@@ -41,6 +42,9 @@ switch(action.type) {
     case(GET_STATUS) : {
         return {...state, status: action.status}
     }
+    case(UPLOAD_USER_PHOTO) : {
+        return {...state, profile: {...state.profile, photos: action.photos}}
+    }
     default : return state;
 }
 
@@ -69,7 +73,24 @@ export const updateProfileStatus = (status) => async (dispatch) => {
         }
     }
 
+export const uploadUserPhoto = (file) => async (dispatch) => {
+    if (file.length == 0 ) return;
+    let response = await profileApi.uploadPhoto(file);
+    let json = await response.json();
 
+    if (json.resultCode == 0) {
+        dispatch(uploadPhotoSuccess(json.data.photos));
+        console.log(json);
+    }
+
+}
+
+export let uploadPhotoSuccess = (photos) => {
+    return {
+        type: UPLOAD_USER_PHOTO,
+        photos
+    }
+}
 
 
 export let postActionCreator = (text) => {
@@ -93,5 +114,6 @@ export let getStatus = (status) => {
         status
     }
 }
+
 
 export default profileReducer;

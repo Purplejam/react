@@ -56,7 +56,7 @@ export const getUsers = (currentPage, pageSize) => async (dispatch) => {
     dispatch(isfetchingToggle(true));
     let response = await userApi.getAllUsers(currentPage, pageSize);
     let json = await response.json();
-    console.log(json);
+
     dispatch(isfetchingToggle(false));
     dispatch(setusers(json.items, json.totalCount));
 }

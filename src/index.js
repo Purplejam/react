@@ -5,7 +5,7 @@ import store from './redux/redux-store.js';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {HashRouter, Route} from 'react-router-dom';
 import {StoreContext} from './storeContext.js';
 /* import {Provider} from './storeContext.js'; */
 import {Provider} from 'react-redux';
@@ -13,11 +13,11 @@ import {Provider} from 'react-redux';
 let renderEntireTree = (state) => {
 	ReactDOM.render(
   <React.StrictMode>
-  	<BrowserRouter>
+  	<HashRouter>
   		<Provider store={store}>
     	<App />
     </Provider>
-   </BrowserRouter>
+   </HashRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

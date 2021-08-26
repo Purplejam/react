@@ -30,12 +30,13 @@ useEffect(() => {
 
     return (<div>
                 {!editMode 
-                    ? <div onDoubleClick={editModeOn}><span>{props.status || 'Enter status'}</span></div>
-                    : <div onBlur={editModeOff}><input onChange={statusChange} autoFocus value={status}/></div>}
+                    ? <div onDoubleClick={editModeOn}><span><b>Status: </b>{props.status || 'Enter status'}</span></div>
+                    : <div onBlur={editModeOff}><b>Status: </b><input onChange={statusChange} autoFocus value={status}/></div>}
 
             </div>)
-
-
 }
+
+
+
 
 export default ProfileStatusWithHooks

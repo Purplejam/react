@@ -1,10 +1,13 @@
-const baseUrl = 'https://social-network.samuraijs.com/api/1.0';
+export const baseUrl = 'https://social-network.samuraijs.com/api/1.0';
 
-const userApi = {
+export const userApi = {
 
 	getAllUsers(currentPage, pageSize) {
 		return fetch(`${baseUrl}/users?page=${currentPage}&count=${pageSize}`, {
-			credentials: 'include'
+			credentials: 'include',
+			headers: {
+				"API-KEY": "7ed1a18b-da95-467c-8ff8-12eb66b13f4e"
+			}
 		})
 	},
 
@@ -20,11 +23,21 @@ const userApi = {
 	},
 
 	getAuth() {
-		return fetch(`${baseUrl}/auth/me`, {credentials: 'include'});
+		return fetch(`${baseUrl}/auth/me`, {
+			credentials: 'include',
+			headers: {
+				"API-KEY": "7ed1a18b-da95-467c-8ff8-12eb66b13f4e"
+			}
+		});
 	},
 
 	getProfile(user) {
-		return fetch(`${baseUrl}/profile/${user}`);
+		return fetch(`${baseUrl}/profile/${user}`, {
+			credentials: 'include',
+			headers: {
+				"API-KEY": "7ed1a18b-da95-467c-8ff8-12eb66b13f4e"
+			}
+		});
 	},
 
 	loginAuth(email, password, rememberMe) {
@@ -49,12 +62,19 @@ const userApi = {
 		})
 	}
 
+
+
 }
 
 
 export const profileApi = {
 	getStatus(user) {
-		return fetch(`${baseUrl}/profile/status/${user}`);
+		return fetch(`${baseUrl}/profile/status/${user}`, {
+			credentials: 'include',
+			headers: {
+				"API-KEY": "7ed1a18b-da95-467c-8ff8-12eb66b13f4e"
+			}
+		});
 	},
 
 	updateStatus(status) {
@@ -69,6 +89,20 @@ export const profileApi = {
          status: status
      }) 
  })
+	}, 
+
+		uploadPhoto(file) {
+		let formData = new FormData();
+		formData.append('file', file[0]);
+
+		return  fetch(`${baseUrl}/profile/photo`, {
+			method: 'PUT',
+			credentials: 'include',
+			body: formData,
+   headers: {
+    "API-KEY": "7ed1a18b-da95-467c-8ff8-12eb66b13f4e"
+			}
+		})
 	}
 
 }
