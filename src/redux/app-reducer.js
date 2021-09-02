@@ -4,7 +4,6 @@ const SET_INITIALIZED = 'SET_INITIALIZED';
 
 let initialState = {
     initialized: false
-
 }
 
 const appReducer = (state = initialState, action) => {

@@ -1,13 +1,28 @@
-import React from 'react';
+import React, {useState} from 'react';
 import classes from './ProfileInfo.module.css';
 import preloader from './../../common/Preloader.js';
 import ProfileStatus from './ProfileStatus.jsx';
 import ProfileStatusWithHooks from './ProfileStatusWithHooks.jsx';
 import imageUser from './../../../assets/images/user.png';
+import ProfileInfoDataForm from './ProfileInfoDataForm.jsx';
 
 
 
-const ProfileInfo = ({profile, updateProfileStatus, status, isOwner, uploadUserPhoto}) => {
+const ProfileInfo = ({profile, updateProfileStatus, status, isOwner, uploadUserPhoto, setProfilePage}) => {
+
+    const [editMode, editModeSet] = useState(false);
+
+    const editProfile = () => {
+        editModeSet(true);
+    }
+
+    const onSubmitForm = (values, setStatus) => {
+        setProfilePage(profile.userId, values, setStatus)
+        .then(() => {
+            editModeSet(false);
+        })
+    }
+
 
 	if (!profile) {
 		return <img src={preloader} />
@@ -26,7 +41,13 @@ const ProfileInfo = ({profile, updateProfileStatus, status, isOwner, uploadUserP
             <div className={classes.largeImg}><img src={profile.photos.large || imageUser} /></div>
             {isOwner && <input type="file" onChange={(e) => uploadFileThunk(e.target.files)}/>}
             <ProfileStatusWithHooks status={status} updateProfileStatus={updateProfileStatus}/>
-            <ProfileData profile={profile}/>
+
+            {editMode 
+                ? <ProfileInfoDataForm profile={profile} setProfilePage={setProfilePage} onSubmitForm={onSubmitForm}/>
+                : <ProfileData profile={profile}/>
+                }
+            {isOwner && <button onClick={editProfile}>Edit info</button>}
+            
 
         </div>
 		);

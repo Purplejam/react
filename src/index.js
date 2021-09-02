@@ -1,26 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import redux from 'redux';
-import store from './redux/redux-store.js';
+import store from './redux/redux-store.tsx';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {HashRouter, Route} from 'react-router-dom';
 import {StoreContext} from './storeContext.js';
-/* import {Provider} from './storeContext.js'; */
 import {Provider} from 'react-redux';
 
 let renderEntireTree = (state) => {
-	ReactDOM.render(
-  <React.StrictMode>
-  	<HashRouter>
-  		<Provider store={store}>
-    	<App />
-    </Provider>
-   </HashRouter>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+  	ReactDOM.render(
+    <React.StrictMode>
+    	<HashRouter>
+      	<Provider store={store}>
+        	<App />
+        </Provider>
+      </HashRouter>
+    </React.StrictMode>,
+    document.getElementById('root')
+  );
 }
 
 

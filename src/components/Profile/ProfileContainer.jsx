@@ -3,7 +3,8 @@ import classes from './Profile.module.css';
 import Posts from './MyPosts/Posts.jsx';
 import Profile from './Profile.jsx';
 import {connect} from 'react-redux';
-import {setUserProfile, getProfileUser, getProfileStatus, updateProfileStatus, uploadUserPhoto} from '../../redux/profile-reducer.js';
+import {setUserProfile, getProfileUser, getProfileStatus, 
+	updateProfileStatus, uploadUserPhoto, setProfilePage} from '../../redux/profile-reducer.tsx';
 import {withRouter} from 'react-router-dom';
 import userApi from './../../api/api.js';
 import {Redirect} from 'react-router-dom';
@@ -59,6 +60,7 @@ class ProfileContainer extends React.Component {
 
 
 export default 	compose(
-		connect(mapStateToProps, {setUserProfile, getProfileUser, getProfileStatus, updateProfileStatus, uploadUserPhoto}),
+		connect(mapStateToProps, {setUserProfile, getProfileUser, getProfileStatus, 
+			updateProfileStatus, uploadUserPhoto, setProfilePage}),
 		withRouter
 		)(ProfileContainer);

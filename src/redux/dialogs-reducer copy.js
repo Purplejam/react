@@ -43,6 +43,8 @@ switch(action.type) {
     return state;
 }
 
+//end of reducer
+
 
 export let messageActionCreator = (message) => {
   return {

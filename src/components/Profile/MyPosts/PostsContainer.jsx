@@ -3,7 +3,7 @@ import classes from './Posts.module.css';
 import Posts from './Posts.jsx';
 import StoreContext from './../../../storeContext.js'
 import {connect} from 'react-redux';
-import {postActionCreator} from './../../../redux/profile-reducer.js';
+import {postActionCreator} from './../../../redux/profile-reducer.tsx';
 
 
 const mapStateToProps = (state) => {

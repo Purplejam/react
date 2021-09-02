@@ -15,7 +15,6 @@ let initialState = {
     currentPage: 1,
     isFetching: false,
     followInPropgress: []
-
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -52,6 +51,8 @@ const usersReducer = (state = initialState, action) => {
 
 }
 
+//end of reducer
+
 export const getUsers = (currentPage, pageSize) => async (dispatch) => {
     dispatch(isfetchingToggle(true));
     let response = await userApi.getAllUsers(currentPage, pageSize);
@@ -83,6 +84,8 @@ export const unfollow = (userId) => async (dispatch) => {
 
     followUndollowMethod(dispatch, userId, 'DELETE', unfollowSucces(userId));
 }
+
+//end of thunks
 
 
 export const followSucces = (userId) => ({type: FOLLOW, userId})

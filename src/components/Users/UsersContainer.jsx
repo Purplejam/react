@@ -1,7 +1,8 @@
 import React from 'react';
 import Users from './Users.jsx';
 import {connect} from 'react-redux';
-import {followSucces, unfollowSucces, setusers, setpage, isfetchingToggle, followInPropgressToggle, getUsers, follow, unfollow} from './../../redux/users-reducer.js';
+import {followSucces, unfollowSucces, setusers, setpage, isfetchingToggle, followInPropgressToggle, 
+	getUsers, follow, unfollow} from './../../redux/users-reducer.tsx';
 import preloader from './../../assets/images/preloader.gif';
 import userApi from './../../api/api.js';
 import {Redirect} from 'react-router-dom';

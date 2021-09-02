@@ -1,5 +1,5 @@
 import React from 'react';
-import store from './redux/redux-store.js';
+import store from './redux/redux-store.tsx';
 
 const StoreContext = React.createContext(null);
 

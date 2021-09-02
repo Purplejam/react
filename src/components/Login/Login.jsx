@@ -15,7 +15,7 @@ const Login = (props) => {
 	return (
     	<div>
          <h1>Login</h1>
-         <FormLogin login={props.login}/>
+         <FormLogin login={props.login} captcha={props.captcha}/>
 
      </div>
 		);
@@ -26,13 +26,13 @@ const Login = (props) => {
 const FormLogin = (props) => {
 
   return	<Formik
-         initialValues={{ email: '', password: '', rememberMe: true }}
+         initialValues={{ email: '', password: '', rememberMe: true, captcha: null }}
          validate={values => {
            const errors = {};
            return errors;
          }}
          onSubmit={(values, {setSubmitting, setStatus}) => {
-             props.login(values.email, values.password, values.rememberMe, setStatus);
+             props.login(values.email, values.password, values.rememberMe, values.captcha, setStatus);
              setSubmitting(false); 
 
          }}
@@ -60,6 +60,13 @@ const FormLogin = (props) => {
               <ErrorMessage name="password" component="div" />  
             </div>
 
+            <div>
+              {props.captcha && <img src={props.captcha} alt=""/>}
+              {props.captcha && 
+
+                <div><Field name="captcha"/></div>}
+            </div>
+
 
              <button type="submit" disabled={isSubmitting}>
                Submit
@@ -72,7 +79,8 @@ const FormLogin = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    captcha: state.auth.captcha
   }
 }
 
