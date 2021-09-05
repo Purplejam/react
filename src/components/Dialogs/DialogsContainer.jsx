@@ -6,7 +6,7 @@ import Dialogs from './Dialogs.jsx';
 import StoreContext from './../../storeContext.js';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import {messageActionCreator} from './../../redux/dialogs-reducer copy.js';
+import {messageActionCreator} from './../../redux/dialogs-reducer copy.tsx';
 import {WithAuthRedirect} from './../../hoc/WithAuthRedirect.js';
 import {compose} from 'redux';
 

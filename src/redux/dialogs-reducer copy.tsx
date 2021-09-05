@@ -17,18 +17,18 @@ let initialState = {
     				]
 }
 
-const dialogsReducer = (state = initialState, action) => {
+const dialogsReducer = (state = initialState, action: any) => {
 
 
-function addNewMessage(text) {
-    let message = {message: text, id: state.messages + 1};
+function addNewMessage(text: any) {
+    let message = {message: text, id: state.messages};
     return {
         ...state,
         messages: [...state.messages, message]
     };
 };
 
-function updateNewMessage(text) {
+function updateNewMessage(text: any) {
     return {
         ...state,
         newPostText: text
@@ -46,7 +46,7 @@ switch(action.type) {
 //end of reducer
 
 
-export let messageActionCreator = (message) => {
+export let messageActionCreator = (message: any) => {
   return {
     type: ADD_NEW_MESSAGE,
     message

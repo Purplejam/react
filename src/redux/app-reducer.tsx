@@ -1,12 +1,15 @@
 import {getAuth} from './auth-reducer.js';
 const SET_INITIALIZED = 'SET_INITIALIZED';
 
+export type initialStateType = {
+    initialized: boolean
+}
 
-let initialState = {
+let initialState: initialStateType = {
     initialized: false
 }
 
-const appReducer = (state = initialState, action) => {
+const appReducer = (state = initialState, action: any) => {
 
 
 
@@ -23,7 +26,9 @@ switch(action.type) {
 
 }
 
-
+type initializedSuccessType = {
+    type: typeof SET_INITIALIZED
+}
 
 export let initializedSuccess = () => {
     return {
@@ -32,7 +37,7 @@ export let initializedSuccess = () => {
 }
 
 export const initializeApp = () => {
-    return (dispatch) => {
+    return (dispatch: any) => {
         let promise = dispatch(getAuth());
         promise.then(() => {
             dispatch(initializedSuccess());

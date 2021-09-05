@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem.jsx';
 import Message from './Message/Message.jsx';
-import {messageActionCreator, updateMessageActionCreator} from './../../redux/dialogs-reducer copy.js';
+import {messageActionCreator, updateMessageActionCreator} from './../../redux/dialogs-reducer copy.tsx';
 import {Redirect} from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage, useFormikContext } from 'formik';
 import * as Yup from 'yup';

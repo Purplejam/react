@@ -7,7 +7,7 @@ import Settings from './components/Settings/Settings.jsx';
 import {BrowserRouter, Route} from 'react-router-dom';
 import ProfileContainer from './components/Profile/ProfileContainer.jsx';
 import Login from './components/Login/Login.jsx';
-import {initializeApp} from './redux/app-reducer.js';
+import {initializeApp} from './redux/app-reducer.tsx';
 import {connect} from 'react-redux';
 import './App.css';
 import preloader from './assets/images/preloader.gif';

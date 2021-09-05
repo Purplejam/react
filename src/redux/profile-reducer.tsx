@@ -29,9 +29,9 @@ let initialState: InitialStateType = {
 }
 
 
-const profileReducer = (state = initialState, action) => {
+const profileReducer = (state = initialState, action: any) => {
 
-    function addPost(text) {
+    function addPost(text: any) {
         let newPost = {message: text, id: 0, likeCount: 2};
 
         return {
@@ -64,14 +64,14 @@ const profileReducer = (state = initialState, action) => {
 
 //end of reducer
 
-export const getProfileUser = (userId) => async (dispatch) => {
+export const getProfileUser = (userId: any) => async (dispatch: any) => {
         let response = await userApi.getProfile(userId);
         let json = await response.json();
         dispatch(setUserProfile(json));
     }
 
 
-export const getProfileStatus = (userId) => async (dispatch) => {
+export const getProfileStatus = (userId: any) => async (dispatch: any) => {
         let response = await profileApi.getStatus(userId);
         let json = await response.json();
         dispatch(getStatus(json));
@@ -79,7 +79,7 @@ export const getProfileStatus = (userId) => async (dispatch) => {
     }
 
 
-export const updateProfileStatus = (status) => async (dispatch) => {
+export const updateProfileStatus = (status: any) => async (dispatch: any) => {
         let response = await profileApi.updateStatus(status);
         let json = await response.json();
         if (json.resultCode === 0) {
@@ -87,7 +87,7 @@ export const updateProfileStatus = (status) => async (dispatch) => {
         }
     }
 
-export const uploadUserPhoto = (file) => async (dispatch) => {
+export const uploadUserPhoto = (file: any) => async (dispatch: any) => {
     if (file.length == 0 ) return;
     let response = await profileApi.uploadPhoto(file);
     let json = await response.json();
@@ -98,28 +98,28 @@ export const uploadUserPhoto = (file) => async (dispatch) => {
     }
 }
 
-export const setProfilePage = (userId, values, setStatus) => async (dispatch) => {
+export const setProfilePage = (userId: any, values: any, setStatus: any) => async (dispatch: any) => {
     let response = await profileApi.setProfilePageApi(userId, values);
     let json = await response.json();
 
     if (json.resultCode === 0) {
         dispatch(getProfileUser(userId));
     } else if (json.resultCode === 1) {
-        let result = [];
-        json.messages.forEach(message => result.push(message + '! '));
+        let result: any = [];
+        json.messages.forEach((message: any) => result.push(message + '! '));
         setStatus(result);
         return Promise.reject(result);
     }
 }
 
-export let updateProfileSuccess = (profile) => {
+export let updateProfileSuccess = (profile: any) => {
     return {
         type: UPDATE_PROFILE_SUCCESS,
         profile
     }
 }
 
-export let uploadPhotoSuccess = (photos) => {
+export let uploadPhotoSuccess = (photos: any) => {
     return {
         type: UPLOAD_USER_PHOTO,
         photos
@@ -127,7 +127,7 @@ export let uploadPhotoSuccess = (photos) => {
 }
 
 
-export let postActionCreator = (text) => {
+export let postActionCreator = (text: any) => {
   return {
     type: ADD_POST,
     text
@@ -135,14 +135,14 @@ export let postActionCreator = (text) => {
 }
 
 
-export let setUserProfile = (profile) => {
+export let setUserProfile = (profile: any) => {
     return {
         type: SET_USER_PROFILE,
         profile
     }
 }
 
-export let getStatus = (status) => {
+export let getStatus = (status: any) => {
     return {
         type: GET_STATUS,
         status

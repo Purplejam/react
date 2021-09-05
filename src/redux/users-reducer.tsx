@@ -17,7 +17,7 @@ let initialState = {
     followInPropgress: []
 }
 
-const usersReducer = (state = initialState, action) => {
+const usersReducer = (state = initialState, action: any) => {
 
     switch(action.type) {
         case FOLLOW:
@@ -53,7 +53,7 @@ const usersReducer = (state = initialState, action) => {
 
 //end of reducer
 
-export const getUsers = (currentPage, pageSize) => async (dispatch) => {
+export const getUsers = (currentPage: any, pageSize: any) => async (dispatch: any) => {
     dispatch(isfetchingToggle(true));
     let response = await userApi.getAllUsers(currentPage, pageSize);
     let json = await response.json();
@@ -62,7 +62,7 @@ export const getUsers = (currentPage, pageSize) => async (dispatch) => {
     dispatch(setusers(json.items, json.totalCount));
 }
 
-export const followUndollowMethod = async (dispatch, userId, rqMethod, action) => {
+export const followUndollowMethod = async (dispatch: any, userId: any, rqMethod: any, action: any) => {
     dispatch(followInPropgressToggle(userId, true));
     let response = await userApi.followUser(userId, rqMethod);
     let json = await response.json();
@@ -74,13 +74,13 @@ export const followUndollowMethod = async (dispatch, userId, rqMethod, action) =
 }
 
 
-export const follow = (userId) => async (dispatch) => {
+export const follow = (userId: any) => async (dispatch: any) => {
 
     followUndollowMethod(dispatch, userId, 'POST', followSucces(userId));
 }
 
 
-export const unfollow = (userId) => async (dispatch) => {
+export const unfollow = (userId: any) => async (dispatch: any) => {
 
     followUndollowMethod(dispatch, userId, 'DELETE', unfollowSucces(userId));
 }
@@ -88,16 +88,16 @@ export const unfollow = (userId) => async (dispatch) => {
 //end of thunks
 
 
-export const followSucces = (userId) => ({type: FOLLOW, userId})
+export const followSucces = (userId: any) => ({type: FOLLOW, userId})
 
-export const unfollowSucces = (userId) => ({type: UNFOLLOW, userId})
+export const unfollowSucces = (userId: any) => ({type: UNFOLLOW, userId})
 
-export const setusers = (users, totalUsersCount) => ({type: SETUSERS, users, totalUsersCount})
+export const setusers = (users: any, totalUsersCount: any) => ({type: SETUSERS, users, totalUsersCount})
 
-export const setpage = (page) => ({type: SETPAGE, page})
+export const setpage = (page: any) => ({type: SETPAGE, page})
 
-export const isfetchingToggle = (isFetching) => ({type: TOGGLEFETCHING, isFetching})
+export const isfetchingToggle = (isFetching: any) => ({type: TOGGLEFETCHING, isFetching})
 
-export const followInPropgressToggle = (userId, isFetching) => ({type: FOLLOW_IN_PROPGRESS, userId, isFetching})
+export const followInPropgressToggle = (userId: any, isFetching: any) => ({type: FOLLOW_IN_PROPGRESS, userId, isFetching})
 
 export default usersReducer;
