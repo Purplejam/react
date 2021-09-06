@@ -9,7 +9,7 @@ let initialState: initialStateType = {
     initialized: false
 }
 
-const appReducer = (state = initialState, action: any) => {
+const appReducer = (state = initialState, action: any): initialStateType => {
 
 
 
@@ -30,7 +30,7 @@ type initializedSuccessType = {
     type: typeof SET_INITIALIZED
 }
 
-export let initializedSuccess = () => {
+export let initializedSuccess = (): initializedSuccessType => {
     return {
         type: SET_INITIALIZED
     }
