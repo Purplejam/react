@@ -17,36 +17,27 @@ let initialState = {
     				]
 }
 
-const dialogsReducer = (state = initialState, action: any) => {
+export type initialStateType = typeof initialState;
+
+const dialogsReducer = (state = initialState, action: any): initialStateType => {
 
 
-function addNewMessage(text: any) {
-    let message = {message: text, id: state.messages};
-    return {
-        ...state,
-        messages: [...state.messages, message]
-    };
-};
-
-function updateNewMessage(text: any) {
-    return {
-        ...state,
-        newPostText: text
-    };
-};
-
-switch(action.type) {
-    case(ADD_NEW_MESSAGE) : 
-        return addNewMessage(action.message);
-    default : return state;
-}
+    switch(action.type) {
+        case ADD_NEW_MESSAGE : 
+        let message = {message: action.message, id: state.messages.length + 1};
+            return {
+                ...state,
+                messages: [...state.messages, message]
+            }
+        default : return state;
+    }
     return state;
 }
 
 //end of reducer
 
 
-export let messageActionCreator = (message: any) => {
+export let messageActionCreator = (message: string) => {
   return {
     type: ADD_NEW_MESSAGE,
     message
