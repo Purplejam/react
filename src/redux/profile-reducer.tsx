@@ -9,27 +9,55 @@ const GET_STATUS = 'GET_STATUS';
 const UPLOAD_USER_PHOTO = 'UPLOAD_USER_PHOTO';
 const UPDATE_PROFILE_SUCCESS = 'UPDATE_PROFILE_SUCCESS';
 
-type InitialStateType = {
-    posts: any,
-    newPostText: string,
-    profile: null | any,
-    status: string
+
+type PostType = {
+    message: string,
+    id: number,
+    likeCount: number
 }
 
 
-let initialState: InitialStateType = {
+type ProfileType = {
+    userId: number,
+    lookingForAJob: string,
+    lookingForAJobDescription: string,
+    fullName: string,
+    contacts: contactsType,
+    photos: photosProfileType
+}
+
+type contactsType = {
+    github: string,
+    vk: string,
+    facebook: string,
+    instagram: string,
+    twitter: string,
+    website: string,
+    youtube: string,
+    mainLink: string
+}
+
+type photosProfileType = {
+    small: string,
+    large: string
+}
+
+
+let initialState = {
     posts: [
         {message: "Hi, how are you?", id: 1, likeCount: 24},
         {message: "My cat, yoo", id: 2, likeCount: 13},
         {message: "lalala", id: 1, likeCount: 64},
-    ],
+    ] as Array<PostType>,
     newPostText: 'enter message',
-    profile: null,
+    profile: null as ProfileType | null,
     status: ''
 }
 
+export type initialStateType = typeof initialState;
 
-const profileReducer = (state = initialState, action: any) => {
+
+const profileReducer = (state = initialState, action: any): initialStateType => {
 
     function addPost(text: any) {
         let newPost = {message: text, id: 0, likeCount: 2};
@@ -52,7 +80,7 @@ const profileReducer = (state = initialState, action: any) => {
             return {...state, status: action.status}
         }
         case (UPLOAD_USER_PHOTO) : {
-            return {...state, profile: {...state.profile, photos: action.photos}}
+            return {...state, profile: {...state.profile, photos: action.photos} as ProfileType}
         }
         case (UPDATE_PROFILE_SUCCESS) : {
             return {...state, profile: {...state.profile, ...action.values}}
@@ -112,14 +140,41 @@ export const setProfilePage = (userId: any, values: any, setStatus: any) => asyn
     }
 }
 
-export let updateProfileSuccess = (profile: any) => {
+//actioncreators
+
+type updateProfileSuccessType = {
+    type: typeof UPDATE_PROFILE_SUCCESS,
+    profile: ProfileType
+}
+
+type uploadPhotoSuccessType = {
+    type: typeof UPLOAD_USER_PHOTO,
+    photos: photosProfileType
+}
+
+type postActionCreatorType = {
+    type: typeof ADD_POST,
+    text: string
+}
+
+type setUserProfileType = {
+    type: typeof SET_USER_PROFILE,
+    profile: ProfileType
+}
+
+type getStatusType = {
+    type: typeof GET_STATUS,
+    status: string
+}
+
+export let updateProfileSuccess = (profile: ProfileType): updateProfileSuccessType => {
     return {
         type: UPDATE_PROFILE_SUCCESS,
         profile
     }
 }
 
-export let uploadPhotoSuccess = (photos: any) => {
+export let uploadPhotoSuccess = (photos: photosProfileType): uploadPhotoSuccessType => {
     return {
         type: UPLOAD_USER_PHOTO,
         photos
@@ -127,7 +182,7 @@ export let uploadPhotoSuccess = (photos: any) => {
 }
 
 
-export let postActionCreator = (text: any) => {
+export let postActionCreator = (text: string): postActionCreatorType => {
   return {
     type: ADD_POST,
     text
@@ -135,14 +190,14 @@ export let postActionCreator = (text: any) => {
 }
 
 
-export let setUserProfile = (profile: any) => {
+export let setUserProfile = (profile: ProfileType) => {
     return {
         type: SET_USER_PROFILE,
         profile
     }
 }
 
-export let getStatus = (status: any) => {
+export let getStatus = (status: string): getStatusType => {
     return {
         type: GET_STATUS,
         status
