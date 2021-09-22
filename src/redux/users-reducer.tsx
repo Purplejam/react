@@ -1,4 +1,5 @@
 import userApi from './../api/api.js';
+import {UserType, ProfileType, contactsType, photosProfileType} from './typesAll/types';
 import {updateObjectInArray} from './../utilits/object-helpers.js';
 
 const FOLLOW = 'FOLLOW';
@@ -8,16 +9,19 @@ const SETPAGE = 'SETPAGE';
 const TOGGLEFETCHING = 'TOGGLEFETCHING';
 const FOLLOW_IN_PROPGRESS = 'FOLLOW_IN_PROPGRESS';
 
+
 let initialState = {
-    users: [],
+    users: [] as Array<UserType>,
     pageSize: 5,
     totalUsersCount: 100,
     currentPage: 1,
     isFetching: false,
-    followInPropgress: []
+    followInPropgress: [] as Array<number>
 }
 
-const usersReducer = (state = initialState, action: any) => {
+type initialStateType = typeof initialState;
+
+const usersReducer = (state = initialState, action: any): initialStateType => {
 
     switch(action.type) {
         case FOLLOW:
@@ -53,7 +57,7 @@ const usersReducer = (state = initialState, action: any) => {
 
 //end of reducer
 
-export const getUsers = (currentPage: any, pageSize: any) => async (dispatch: any) => {
+export const getUsers = (currentPage: number, pageSize: number) => async (dispatch: any) => {
     dispatch(isfetchingToggle(true));
     let response = await userApi.getAllUsers(currentPage, pageSize);
     let json = await response.json();
@@ -62,7 +66,7 @@ export const getUsers = (currentPage: any, pageSize: any) => async (dispatch: an
     dispatch(setusers(json.items, json.totalCount));
 }
 
-export const followUndollowMethod = async (dispatch: any, userId: any, rqMethod: any, action: any) => {
+export const followUndollowMethod = async (dispatch: any, userId: number, rqMethod: any, action: any) => {
     dispatch(followInPropgressToggle(userId, true));
     let response = await userApi.followUser(userId, rqMethod);
     let json = await response.json();
@@ -74,30 +78,61 @@ export const followUndollowMethod = async (dispatch: any, userId: any, rqMethod:
 }
 
 
-export const follow = (userId: any) => async (dispatch: any) => {
+export const follow = (userId: number) => async (dispatch: any) => {
 
     followUndollowMethod(dispatch, userId, 'POST', followSucces(userId));
 }
 
 
-export const unfollow = (userId: any) => async (dispatch: any) => {
+export const unfollow = (userId: number) => async (dispatch: any) => {
 
     followUndollowMethod(dispatch, userId, 'DELETE', unfollowSucces(userId));
 }
 
 //end of thunks
 
+type followSuccesType = {
+   type: typeof FOLLOW,
+   userId: number
+}
 
-export const followSucces = (userId: any) => ({type: FOLLOW, userId})
+export const followSucces = (userId: number): followSuccesType => ({type: FOLLOW, userId})
 
-export const unfollowSucces = (userId: any) => ({type: UNFOLLOW, userId})
+type unfollowSuccesType = {
+   type: typeof UNFOLLOW,
+   userId: number
+}
 
-export const setusers = (users: any, totalUsersCount: any) => ({type: SETUSERS, users, totalUsersCount})
+export const unfollowSucces = (userId: number): unfollowSuccesType => ({type: UNFOLLOW, userId})
 
-export const setpage = (page: any) => ({type: SETPAGE, page})
+type setusersType = {
+   type: typeof SETUSERS,
+   users: Array<UserType>,
+   totalUsersCount: number
+}
 
-export const isfetchingToggle = (isFetching: any) => ({type: TOGGLEFETCHING, isFetching})
+export const setusers = (users: Array<UserType>, totalUsersCount: number): setusersType => ({type: SETUSERS, users, totalUsersCount})
 
-export const followInPropgressToggle = (userId: any, isFetching: any) => ({type: FOLLOW_IN_PROPGRESS, userId, isFetching})
+type setpageType = {
+   type: typeof SETPAGE,
+   page: number
+}
+
+export const setpage = (page: number): setpageType => ({type: SETPAGE, page})
+
+type isfetchingToggleType = {
+   type: typeof TOGGLEFETCHING,
+   isFetching: boolean
+}
+
+export const isfetchingToggle = (isFetching: boolean): isfetchingToggleType => ({type: TOGGLEFETCHING, isFetching})
+
+type followInPropgressToggleType = {
+   type: typeof FOLLOW_IN_PROPGRESS,
+   userId: number,
+   isFetching: boolean
+}
+
+export const followInPropgressToggle = (userId: number, isFetching: boolean): followInPropgressToggleType => ({type: FOLLOW_IN_PROPGRESS, userId, isFetching})
 
 export default usersReducer;

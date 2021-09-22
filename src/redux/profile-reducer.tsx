@@ -1,4 +1,5 @@
 import userApi from './../api/api.js';
+import {UserType, ProfileType, contactsType, photosProfileType} from './typesAll/types';
 import {profileApi} from './../api/api.js';
 
 
@@ -14,32 +15,6 @@ type PostType = {
     message: string,
     id: number,
     likeCount: number
-}
-
-
-type ProfileType = {
-    userId: number,
-    lookingForAJob: string,
-    lookingForAJobDescription: string,
-    fullName: string,
-    contacts: contactsType,
-    photos: photosProfileType
-}
-
-type contactsType = {
-    github: string,
-    vk: string,
-    facebook: string,
-    instagram: string,
-    twitter: string,
-    website: string,
-    youtube: string,
-    mainLink: string
-}
-
-type photosProfileType = {
-    small: string,
-    large: string
 }
 
 
